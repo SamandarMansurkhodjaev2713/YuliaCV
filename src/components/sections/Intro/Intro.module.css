@@ -70,9 +70,23 @@
 .name {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(4.2rem, 12vw, 8.8rem);
+  font-size: clamp(3.8rem, 10.2vw, 7.5rem);
   line-height: 0.92;
   letter-spacing: -0.05em;
+}
+
+.surnameMask {
+  margin-top: -0.04em;
+}
+
+.surname {
+  margin: 0;
+  color: var(--oxblood);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6.65vw, 5rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.055em;
 }
 
 .role {
@@ -92,8 +106,9 @@
 
 .sequence {
   margin: var(--space-4) 0 0;
-  color: var(--muted-ink);
+  color: var(--oxblood);
   font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.14em;
 }
 

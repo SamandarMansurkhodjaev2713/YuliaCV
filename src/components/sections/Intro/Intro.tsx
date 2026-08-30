@@ -74,6 +74,16 @@ export function Intro() {
                 ЮЛИЯ
               </motion.p>
             </div>
+            <div className={`${styles.mask} ${styles.surnameMask}`}>
+              <motion.p
+                className={styles.surname}
+                initial={{ y: '-108%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.62, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+              >
+                БРЫНСКИХ
+              </motion.p>
+            </div>
             <motion.p
               className={styles.role}
               initial={{ opacity: 0, y: 8 }}
@@ -94,7 +104,7 @@ export function Intro() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.28 }}
             >
-              ТАШКЕНТ · 2026
+              СМЫСЛ · ФОРМА · ДЕЙСТВИЕ
             </motion.p>
           </div>
         </motion.div>

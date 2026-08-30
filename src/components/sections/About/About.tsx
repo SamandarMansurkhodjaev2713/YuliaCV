@@ -60,8 +60,8 @@ export function About() {
 
           <motion.figure
             className={styles.imageBand}
-            initial={reduceMotion ? false : { clipPath: 'inset(0 100% 0 0)' }}
-            whileInView={reduceMotion ? undefined : { clipPath: 'inset(0 0 0 0)' }}
+            initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.99 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
           >

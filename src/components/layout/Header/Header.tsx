@@ -39,7 +39,7 @@ export function Header() {
       <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
         <Container className={styles.inner}>
           <a className={styles.brand} href="#hero" aria-label="Юлия Брынских. На начало страницы">
-            <strong aria-hidden="true">YB.</strong>
+            <strong aria-hidden="true">YB</strong>
             <span>ЮЛИЯ БРЫНСКИХ · SMM-СТРАТЕГ</span>
           </a>
 
