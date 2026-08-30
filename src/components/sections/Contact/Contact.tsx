@@ -24,7 +24,7 @@ export function MobileContactBar() {
         target="_blank"
         rel="noopener noreferrer"
         tabIndex={isVisible ? 0 : -1}
-        aria-label="Написать Юлии в Telegram, откроется в новой вкладке"
+        aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
       >
         Написать в Telegram <ArrowIcon />
       </a>
@@ -64,7 +64,7 @@ export function Contact() {
             href={siteContent.contacts.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Написать Юлии в Telegram, откроется в новой вкладке"
+            aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
           >
             <span>{siteContent.contact.telegramLabel}</span>
             <ArrowIcon />

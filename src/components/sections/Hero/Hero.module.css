@@ -209,7 +209,7 @@
 .competenceStrip {
   grid-column: 1 / -1;
   grid-row: 2;
-  min-width: max-content;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -331,6 +331,7 @@
 
   .competenceStrip {
     grid-column: 1 / -1;
+    min-width: 0;
     overflow: hidden;
     gap: var(--space-4);
   }

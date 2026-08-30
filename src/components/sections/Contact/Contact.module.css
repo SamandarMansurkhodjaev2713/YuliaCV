@@ -138,7 +138,7 @@
   font-family: var(--font-display);
   font-size: clamp(4rem, 8vw, 8rem);
   line-height: 0.8;
-  color: rgba(250, 247, 240, 0.12);
+  color: rgba(250, 247, 240, 0.62);
 }
 
 .mobileBar {

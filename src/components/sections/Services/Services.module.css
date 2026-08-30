@@ -105,7 +105,7 @@
   }
 
   .item {
-    grid-template-columns: 36px 1fr 22px;
+    grid-template-columns: 36px minmax(0, 1fr) 22px;
     gap: var(--space-3);
     padding: var(--space-6) 0;
   }
@@ -116,7 +116,9 @@
 
   .item p {
     grid-column: 2 / -1;
+    min-width: 0;
     margin-top: var(--space-2);
+    overflow-wrap: anywhere;
     font-size: var(--text-base);
   }
 
