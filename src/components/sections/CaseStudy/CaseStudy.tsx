@@ -173,10 +173,10 @@ function CaseMedia({ step, animated = false }: CaseMediaProps) {
   return (
     <motion.div
       className={styles.mediaMotion}
-      initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
-      animate={{ opacity: 1, clipPath: 'inset(0 0 0 0)' }}
-      exit={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 14, scale: 0.992 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -8, scale: 0.996 }}
+      transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
     >
       {content}
     </motion.div>

@@ -14,12 +14,13 @@ interface MaskTextProps {
 
 export function MaskText({ as = 'div', children, className, delay = 0, id }: MaskTextProps) {
   const reduceMotion = useReducedMotion();
+  const shouldAnimate = !reduceMotion && as !== 'h2';
   const classes = className ? `${styles.mask} ${className}` : styles.mask;
   const animatedContent = (
     <motion.span
       className={styles.inner}
-      initial={reduceMotion ? false : { y: '108%' }}
-      whileInView={reduceMotion ? undefined : { y: 0 }}
+      initial={shouldAnimate ? { y: '108%' } : false}
+      whileInView={shouldAnimate ? { y: 0 } : undefined}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.72, delay, ease: [0.22, 1, 0.36, 1] }}
     >

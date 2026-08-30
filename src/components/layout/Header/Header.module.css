@@ -10,7 +10,8 @@
 }
 
 .scrolled {
-  background: rgba(242, 237, 227, 0.96);
+  background: rgba(242, 237, 227, 0.9);
+  backdrop-filter: blur(14px);
   border-bottom-color: var(--line);
 }
 
@@ -28,6 +29,7 @@
 }
 
 .brand {
+  min-height: 44px;
   display: inline-flex;
   align-items: baseline;
   gap: 0.45rem;
@@ -54,6 +56,9 @@
 }
 
 .navigation a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   position: relative;
   padding-block: 0.75rem;
   color: inherit;
@@ -80,7 +85,7 @@
 }
 
 .contact {
-  min-height: 42px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;

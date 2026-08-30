@@ -5,11 +5,12 @@ import styles from './MobileMenu.module.css';
 
 interface MobileMenuProps {
   readonly isOpen: boolean;
-  readonly onClose: () => void;
+  readonly onClose: (restoreFocus?: boolean) => void;
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const restoreFocusRef = useRef(true);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -33,7 +34,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
     const handleClose = () => {
       delete document.body.dataset.menuOpen;
-      onClose();
+      onClose(restoreFocusRef.current);
+      restoreFocusRef.current = true;
     };
     const handleCancel = (event: Event) => {
       event.preventDefault();
@@ -48,7 +50,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [onClose]);
 
-  const closeFromLink = () => dialogRef.current?.close();
+  const closeFromLink = () => {
+    restoreFocusRef.current = false;
+    dialogRef.current?.close();
+  };
 
   return (
     <dialog
@@ -92,7 +97,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             href={siteContent.contacts.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Написать Юлии в Telegram, откроется в новой вкладке"
+            aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
           >
             Telegram <ArrowIcon />
           </a>

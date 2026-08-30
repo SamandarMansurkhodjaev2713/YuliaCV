@@ -8,6 +8,27 @@
   color: var(--paper-soft);
 }
 
+.section::before,
+.section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.section::before {
+  opacity: 0.2;
+  background-image: linear-gradient(90deg, transparent 0 49.92%, rgba(250, 247, 240, 0.3) 50%, transparent 50.08%);
+  background-size: min(100%, 720px) 100%;
+  background-position: center;
+}
+
+.section::after {
+  inset: 8% var(--page-gutter) auto;
+  height: 1px;
+  background: rgba(250, 247, 240, 0.26);
+}
+
 .plane {
   position: absolute;
   inset: 0;
@@ -182,7 +203,7 @@
   }
 
   .contactIndex {
-    top: 2rem;
+    top: calc(64px + max(1.5rem, env(safe-area-inset-top)));
   }
 
   .contactIndex span:first-child {

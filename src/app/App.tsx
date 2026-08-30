@@ -17,19 +17,21 @@ export function App() {
         Перейти к основному содержанию
       </a>
       <Intro />
-      <Header />
-      <main id="main-content">
-        <Hero />
-        <Method />
-        <CaseStudy />
-        <Services />
-        <Process />
-        <About />
-        <Education />
-        <Contact />
-      </main>
-      <Footer />
-      <MobileContactBar />
+      <div id="app-shell">
+        <Header />
+        <main id="main-content">
+          <Hero />
+          <Method />
+          <CaseStudy />
+          <Services />
+          <Process />
+          <About />
+          <Education />
+          <Contact />
+        </main>
+        <Footer />
+        <MobileContactBar />
+      </div>
     </>
   );
 }

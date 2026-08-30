@@ -14,9 +14,16 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: rootRef, offset: ['start start', 'end start'] });
   const imageY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, 12]);
   const stripX = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -6]);
+  const fieldY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -28]);
+  const fieldX = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, 18]);
 
   return (
     <section ref={rootRef} id="hero" className={styles.hero} aria-labelledby="hero-title">
+      <motion.div className={styles.field} aria-hidden="true" style={{ x: fieldX, y: fieldY }}>
+        <span className={styles.fieldHalo} />
+        <span className={styles.fieldDisc} />
+        <span className={styles.fieldRule} />
+      </motion.div>
       <Container className={styles.grid}>
         <div className={styles.copy}>
           <Reveal className={styles.eyebrow} y={10}>
@@ -40,7 +47,7 @@ export function Hero() {
               href={siteContent.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Написать Юлии в Telegram, откроется в новой вкладке"
+              aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
             >
               <span>{siteContent.hero.primaryCta}</span>
               <ArrowIcon />
@@ -55,13 +62,18 @@ export function Hero() {
             <span>00 / PORTFOLIO</span>
             <span>{siteContent.hero.location}</span>
           </Reveal>
+
+          <Reveal className={styles.proof} delay={0.31} y={12}>
+            <span>РАБОЧАЯ РАМКА</span>
+            <p>Бренд / аудитория / контент / следующее действие</p>
+          </Reveal>
         </div>
 
         <motion.div
           className={styles.portraitArea}
-          initial={reduceMotion ? false : { clipPath: 'inset(100% 0 0 0)' }}
-          animate={reduceMotion ? undefined : { clipPath: 'inset(0 0 0 0)' }}
-          transition={{ duration: 0.9, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+          initial={reduceMotion ? false : { opacity: 0, y: 28, scale: 0.985 }}
+          animate={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.72, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className={styles.portraitFrame}>
             <motion.img
@@ -81,9 +93,9 @@ export function Hero() {
             </div>
           </div>
           <div className={styles.portraitCaption}>
-            <span>POSITIONING</span>
-            <span>TONE OF VOICE</span>
-            <span>CONTENT SYSTEM</span>
+            <span>ПОЗИЦИОНИРОВАНИЕ</span>
+            <span>ГОЛОС БРЕНДА</span>
+            <span>КОНТЕНТ-СИСТЕМА</span>
           </div>
           <span className={styles.verticalWord} aria-hidden="true">
             SMM

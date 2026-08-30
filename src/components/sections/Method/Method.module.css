@@ -13,7 +13,7 @@
 }
 
 .layout {
-  margin-top: clamp(4rem, 8vw, 8rem);
+  margin-top: clamp(3rem, 6vw, 6rem);
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--grid-gap);
@@ -301,7 +301,7 @@
     grid-column: 1 / -1;
     position: relative;
     top: auto;
-    min-height: 390px;
+    min-height: 310px;
     margin-top: var(--space-7);
   }
 }

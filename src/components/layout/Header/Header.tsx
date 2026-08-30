@@ -29,9 +29,9 @@ export function Header() {
     };
   }, []);
 
-  const closeMenu = useCallback(() => {
+  const closeMenu = useCallback((restoreFocus = true) => {
     setIsMenuOpen(false);
-    window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+    if (restoreFocus) window.requestAnimationFrame(() => menuButtonRef.current?.focus());
   }, []);
 
   return (
@@ -65,7 +65,7 @@ export function Header() {
             href={siteContent.contacts.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Написать Юлии в Telegram, откроется в новой вкладке"
+            aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
           >
             Написать <ArrowIcon />
           </a>

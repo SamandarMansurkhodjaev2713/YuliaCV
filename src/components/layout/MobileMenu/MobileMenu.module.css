@@ -6,9 +6,10 @@
   margin: 0;
   padding: 0;
   border: 0;
-  background: transparent;
+  background: var(--oxblood);
   color: var(--paper-soft);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .dialog::backdrop {
@@ -106,6 +107,13 @@
   animation-fill-mode: forwards;
 }
 
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--paper-soft);
+  outline: 2px solid var(--paper-soft);
+  outline-offset: -4px;
+}
+
 .navLink > span {
   font-size: var(--text-xs);
   opacity: 0.66;
@@ -178,6 +186,32 @@
     width: min(72vw, 720px);
     margin-left: auto;
     padding-inline: clamp(2rem, 6vw, 5rem);
+  }
+}
+
+@media (max-width: 767px) and (orientation: landscape) {
+  .panel {
+    min-height: auto;
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+    padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
+  }
+
+  .topline,
+  .bottom {
+    padding-block: var(--space-3);
+  }
+
+  .navigation {
+    align-self: start;
+    margin-block: var(--space-3);
+  }
+
+  .navLink {
+    min-height: 48px;
+  }
+
+  .navLink strong {
+    font-size: clamp(1.55rem, 4.7vw, 2.15rem);
   }
 }
 

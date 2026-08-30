@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { hasSeenIntro, markIntroSeen } from '../../../lib/introSession';
 import styles from './Intro.module.css';
 
-const INTRO_DURATION_MS = 980;
+const INTRO_HOLD_MS = 720;
+const INTRO_EXIT_MS = 460;
 
 export function Intro() {
   const reduceMotion = useReducedMotion();
@@ -21,15 +22,25 @@ export function Intro() {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const appShell = document.getElementById('app-shell');
+    appShell?.setAttribute('inert', '');
+    appShell?.setAttribute('aria-hidden', 'true');
     const timeoutId = window.setTimeout(() => {
       markIntroSeen(window.sessionStorage);
       setIsVisible(false);
+    }, INTRO_HOLD_MS);
+    const unlockTimeoutId = window.setTimeout(() => {
       document.body.style.overflow = previousOverflow;
-    }, INTRO_DURATION_MS);
+      appShell?.removeAttribute('inert');
+      appShell?.removeAttribute('aria-hidden');
+    }, INTRO_HOLD_MS + INTRO_EXIT_MS);
 
     return () => {
       window.clearTimeout(timeoutId);
+      window.clearTimeout(unlockTimeoutId);
       document.body.style.overflow = previousOverflow;
+      appShell?.removeAttribute('inert');
+      appShell?.removeAttribute('aria-hidden');
     };
   }, [isVisible, reduceMotion]);
 
@@ -40,9 +51,9 @@ export function Intro() {
           className={styles.overlay}
           data-testid="intro-overlay"
           aria-hidden="true"
-          initial={{ clipPath: 'inset(0 0 0 0)' }}
-          exit={{ clipPath: 'inset(0 0 100% 0)' }}
-          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ y: 0 }}
+          exit={{ y: '-100%' }}
+          transition={{ duration: INTRO_EXIT_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
         >
           <div className={styles.content}>
             <div className={styles.mask}>

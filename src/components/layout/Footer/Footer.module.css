@@ -37,6 +37,7 @@
 }
 
 .links a {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
