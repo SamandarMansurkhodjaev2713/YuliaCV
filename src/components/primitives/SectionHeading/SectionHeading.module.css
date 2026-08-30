@@ -25,6 +25,8 @@
   line-height: 0.99;
   letter-spacing: -0.035em;
   text-wrap: balance;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .description {

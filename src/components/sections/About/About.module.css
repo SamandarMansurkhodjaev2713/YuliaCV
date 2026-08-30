@@ -1,5 +1,5 @@
 .section {
-  padding: var(--section-space) 0;
+  padding: var(--section-space) 0 var(--space-8);
   background: var(--paper);
 }
 
@@ -41,6 +41,8 @@
   font-weight: 400;
   line-height: 0.94;
   letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .quote {
@@ -183,8 +185,7 @@
   }
 
   .statement,
-  .story,
-  .imageBand {
+  .story {
     grid-column: 1 / -1;
   }
 
@@ -200,8 +201,4 @@
     font-size: var(--text-base);
   }
 
-  .imageBand {
-    margin-top: var(--space-9);
-    aspect-ratio: 12 / 7;
-  }
 }

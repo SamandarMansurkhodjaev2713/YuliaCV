@@ -1,5 +1,4 @@
 import { motion, useReducedMotion } from 'motion/react';
-import detailUrl from '../../../assets/images/yulia-working-detail.webp';
 import { siteContent } from '../../../content/site';
 import { MaskText } from '../../motion/MaskText/MaskText';
 import { Reveal } from '../../motion/Reveal/Reveal';
@@ -58,19 +57,6 @@ export function About() {
             </Reveal>
           </div>
 
-          <motion.figure
-            className={styles.imageBand}
-            initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.99 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <img src={detailUrl} alt="Рабочий портрет Юлии" width="1200" height="700" loading="lazy" />
-            <figcaption>
-              <span>CLIENT SERVICE → MARKETING</span>
-              <span>Y.B.</span>
-            </figcaption>
-          </motion.figure>
         </div>
       </Container>
     </section>
