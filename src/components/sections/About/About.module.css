@@ -132,7 +132,9 @@
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: 56% 34%;
+  transform: scale(1.14);
+  transform-origin: 56% 34%;
   filter: saturate(0.72) contrast(1.04);
 }
 
