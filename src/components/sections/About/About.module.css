@@ -121,7 +121,8 @@
   grid-column: 3 / 11;
   position: relative;
   margin: clamp(4rem, 8vw, 8rem) 0 0;
-  height: clamp(240px, 30vw, 410px);
+  aspect-ratio: 12 / 7;
+  height: auto;
   overflow: hidden;
   border: 1px solid var(--line);
 }
@@ -199,6 +200,6 @@
 
   .imageBand {
     margin-top: var(--space-9);
-    height: 250px;
+    aspect-ratio: 12 / 7;
   }
 }

@@ -39,6 +39,30 @@
   text-align: center;
 }
 
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: var(--space-5);
+  color: var(--oxblood);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.mark span {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: -0.07em;
+}
+
+.mark i {
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+}
+
 .mask {
   overflow: hidden;
 }

@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { hasSeenIntro, markIntroSeen } from '../../../lib/introSession';
 import styles from './Intro.module.css';
 
-const INTRO_HOLD_MS = 720;
-const INTRO_EXIT_MS = 460;
+const INTRO_HOLD_MS = 880;
+const INTRO_EXIT_MS = 500;
 
 export function Intro() {
   const reduceMotion = useReducedMotion();
@@ -56,6 +56,14 @@ export function Intro() {
           transition={{ duration: INTRO_EXIT_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
         >
           <div className={styles.content}>
+            <motion.div
+              className={styles.mark}
+              initial={{ opacity: 0, rotate: -8, scale: 0.92 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span>YB.</span><i />
+            </motion.div>
             <div className={styles.mask}>
               <motion.p
                 className={styles.name}
@@ -72,7 +80,7 @@ export function Intro() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.42, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              SMM / MARKETING
+              SMM-СТРАТЕГИЯ · КОНТЕНТ
             </motion.p>
             <motion.span
               className={styles.line}
@@ -86,7 +94,7 @@ export function Intro() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.28 }}
             >
-              ГОЛОС · СИСТЕМА · ДЕЙСТВИЕ
+              ТАШКЕНТ · 2026
             </motion.p>
           </div>
         </motion.div>

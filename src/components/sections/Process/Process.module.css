@@ -30,7 +30,7 @@
 .step {
   position: relative;
   width: 50%;
-  min-height: 205px;
+  min-height: 175px;
   display: flex;
   align-items: center;
 }
@@ -126,7 +126,10 @@
   }
 
   .step h3 {
-    font-size: clamp(2.2rem, 12vw, 3.4rem);
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 
   .step p,

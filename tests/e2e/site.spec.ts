@@ -13,7 +13,7 @@ test.describe('public portfolio', () => {
     await skipIntro(page);
     await page.goto('./');
 
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Сначала бизнес-задача');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Юлия');
     const telegramLink = page.getByRole('link', { name: /Написать в Telegram/i }).first();
     await expect(telegramLink).toHaveAttribute('href', 'https://t.me/yulleishn');
     await expect(page.getByRole('heading', { name: /UNNI/i })).toBeVisible();

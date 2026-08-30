@@ -23,6 +23,7 @@ export function Hero() {
         <span className={styles.fieldHalo} />
         <span className={styles.fieldDisc} />
         <span className={styles.fieldRule} />
+        <span className={styles.fieldType}>СМЫСЛ → СИСТЕМА</span>
       </motion.div>
       <Container className={styles.grid}>
         <div className={styles.copy}>
@@ -83,8 +84,8 @@ export function Hero() {
               height="1200"
               fetchPriority="high"
               style={{ y: imageY }}
-              initial={reduceMotion ? false : { scale: 1.025 }}
-              animate={reduceMotion ? undefined : { scale: 1 }}
+              initial={reduceMotion ? false : { scale: 1.09 }}
+              animate={reduceMotion ? undefined : { scale: 1.06 }}
               transition={{ duration: 1.05, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
             />
             <div className={styles.imageIndex} aria-hidden="true">
