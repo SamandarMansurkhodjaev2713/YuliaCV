@@ -1,0 +1,54 @@
+:root {
+  --paper: #f2ede3;
+  --paper-soft: #faf7f0;
+  --ink: #171412;
+  --oxblood: #690b10;
+  --oxblood-light: #d7a1a3;
+  --muted-ink: #6f675f;
+  --line: rgba(23, 20, 18, 0.2);
+
+  --font-display: 'Prata', 'Times New Roman', serif;
+  --font-body: 'Onest', Arial, sans-serif;
+
+  --text-xs: clamp(0.68rem, 0.64rem + 0.12vw, 0.77rem);
+  --text-sm: clamp(0.82rem, 0.78rem + 0.12vw, 0.92rem);
+  --text-base: clamp(0.98rem, 0.93rem + 0.14vw, 1.08rem);
+  --text-md: clamp(1.02rem, 0.95rem + 0.26vw, 1.22rem);
+  --text-lg: clamp(1.12rem, 1rem + 0.42vw, 1.45rem);
+  --heading-lg: clamp(3.2rem, 5.7vw, 6.9rem);
+  --heading-xl: clamp(4rem, 7.4vw, 8.6rem);
+  --hero-size: clamp(4.55rem, 8.1vw, 9.15rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.75rem;
+  --space-8: 3.75rem;
+  --space-9: 5rem;
+  --space-10: 7rem;
+
+  --container-max: 1320px;
+  --page-gutter: clamp(1.25rem, 3.6vw, 4.5rem);
+  --grid-gap: clamp(1rem, 1.65vw, 1.5rem);
+  --section-space: clamp(7rem, 11vw, 10.5rem);
+
+  --duration-fast: 190ms;
+  --duration-medium: 420ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --z-header: 40;
+  --z-mobile-cta: 45;
+  --z-intro: 100;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --hero-size: clamp(3.8rem, 16.6vw, 6rem);
+    --heading-lg: clamp(2.9rem, 13vw, 4.5rem);
+    --heading-xl: clamp(3.5rem, 15vw, 5.4rem);
+    --section-space: clamp(5.5rem, 20vw, 7rem);
+  }
+}

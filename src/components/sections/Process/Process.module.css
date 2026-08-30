@@ -1,0 +1,137 @@
+.section {
+  padding: var(--section-space) 0;
+  background: var(--paper-soft);
+}
+
+.timeline {
+  position: relative;
+  margin-top: clamp(4rem, 8vw, 8rem);
+  padding-block: var(--space-5);
+}
+
+.baseLine,
+.progressLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform-origin: top;
+}
+
+.baseLine {
+  background: var(--line);
+}
+
+.progressLine {
+  background: var(--oxblood);
+}
+
+.step {
+  position: relative;
+  width: 50%;
+  min-height: 205px;
+  display: flex;
+  align-items: center;
+}
+
+.left {
+  padding-right: clamp(3rem, 7vw, 7.5rem);
+  text-align: right;
+}
+
+.right {
+  margin-left: 50%;
+  padding-left: clamp(3rem, 7vw, 7.5rem);
+}
+
+.dot {
+  position: absolute;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--paper-soft);
+  border-radius: 50%;
+  background: var(--oxblood);
+  box-shadow: 0 0 0 1px var(--oxblood);
+  transform: translateY(-50%);
+}
+
+.left .dot {
+  right: -5px;
+}
+
+.right .dot {
+  left: -6px;
+}
+
+.stepCopy {
+  width: 100%;
+}
+
+.stepCopy > span {
+  color: var(--oxblood);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+}
+
+.step h3 {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.7vw, 4.1rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.step p {
+  margin: var(--space-4) 0 0;
+  color: var(--muted-ink);
+  font-size: var(--text-md);
+  line-height: 1.52;
+}
+
+.left p {
+  margin-left: auto;
+}
+
+.step p {
+  max-width: 39ch;
+}
+
+@media (max-width: 767px) {
+  .timeline {
+    padding-left: 32px;
+  }
+
+  .baseLine,
+  .progressLine {
+    left: 5px;
+  }
+
+  .step,
+  .left,
+  .right {
+    width: 100%;
+    min-height: 0;
+    margin-left: 0;
+    padding: var(--space-7) 0 var(--space-8) var(--space-5);
+    text-align: left;
+  }
+
+  .left .dot,
+  .right .dot {
+    left: -32px;
+    right: auto;
+  }
+
+  .step h3 {
+    font-size: clamp(2.2rem, 12vw, 3.4rem);
+  }
+
+  .step p,
+  .left p {
+    margin-left: 0;
+    font-size: var(--text-base);
+  }
+}

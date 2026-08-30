@@ -1,0 +1,138 @@
+.section {
+  padding: var(--section-space) 0;
+  background: var(--paper);
+}
+
+.list {
+  margin-top: clamp(4rem, 8vw, 8rem);
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(220px, 0.8fr) 1fr 28px;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-6) 0 var(--space-7);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.rule {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--line);
+  transform-origin: left;
+}
+
+.number {
+  color: var(--oxblood);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+}
+
+.item h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.item p {
+  margin: 0;
+  max-width: 45ch;
+  color: var(--muted-ink);
+  font-size: var(--text-md);
+  line-height: 1.5;
+}
+
+.arrow {
+  width: 22px;
+  height: 22px;
+  color: var(--oxblood);
+  opacity: 0.45;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.item:hover h3 {
+  transform: translateX(4px);
+}
+
+.item:hover .arrow {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.footnote {
+  margin-top: var(--space-10);
+  margin-left: calc((100% + var(--grid-gap)) / 12 * 7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--ink);
+}
+
+.footnote span {
+  color: var(--oxblood);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footnote p {
+  margin: var(--space-3) 0 0;
+  max-width: 42ch;
+  font-size: var(--text-md);
+  line-height: 1.5;
+}
+
+@media (max-width: 1099px) {
+  .item {
+    grid-template-columns: 54px minmax(190px, 0.8fr) 1fr 24px;
+  }
+
+  .footnote {
+    margin-left: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .list {
+    margin-top: var(--space-9);
+  }
+
+  .item {
+    grid-template-columns: 36px 1fr 22px;
+    gap: var(--space-3);
+    padding: var(--space-6) 0;
+  }
+
+  .item h3 {
+    font-size: clamp(1.75rem, 9vw, 2.6rem);
+  }
+
+  .item p {
+    grid-column: 2 / -1;
+    margin-top: var(--space-2);
+    font-size: var(--text-base);
+  }
+
+  .arrow {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .footnote {
+    margin-left: 0;
+    margin-top: var(--space-8);
+  }
+}
+
+@media (hover: none) {
+  .arrow {
+    opacity: 0.8;
+  }
+}

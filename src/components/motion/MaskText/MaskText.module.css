@@ -1,0 +1,8 @@
+.mask {
+  overflow: hidden;
+}
+
+.inner {
+  display: block;
+  will-change: transform;
+}

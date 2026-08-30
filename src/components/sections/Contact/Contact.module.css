@@ -1,0 +1,224 @@
+.section {
+  position: relative;
+  min-height: min(88svh, 900px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper-soft);
+}
+
+.plane {
+  position: absolute;
+  inset: 0;
+  background: var(--oxblood);
+  transform-origin: bottom;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  padding: clamp(6rem, 12vw, 10rem) 0;
+}
+
+.eyebrow {
+  color: rgba(250, 247, 240, 0.7);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+}
+
+.title {
+  margin: clamp(2.2rem, 5vw, 4.5rem) 0 0;
+  max-width: 10.5ch;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 9.2vw, 9.5rem);
+  font-weight: 400;
+  line-height: 0.91;
+  letter-spacing: -0.05em;
+}
+
+.description {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  margin-left: 50%;
+}
+
+.description p {
+  margin: 0;
+  max-width: 46ch;
+  color: rgba(250, 247, 240, 0.78);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+
+.actions {
+  margin-top: var(--space-8);
+  margin-left: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.telegram {
+  position: relative;
+  min-width: min(100%, 330px);
+  min-height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: 1rem 1.2rem;
+  overflow: hidden;
+  border: 1px solid var(--paper-soft);
+  color: var(--paper-soft);
+  text-decoration: none;
+  isolation: isolate;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.telegram::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--paper-soft);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.telegram:hover,
+.telegram:focus-visible {
+  color: var(--oxblood);
+}
+
+.telegram:hover::before,
+.telegram:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.telegram svg,
+.secondary svg {
+  width: 22px;
+  height: 22px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.telegram:hover svg,
+.telegram:focus-visible svg,
+.secondary:hover svg,
+.secondary:focus-visible svg {
+  transform: translateX(5px);
+}
+
+.secondary {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--paper-soft);
+  text-decoration-color: rgba(250, 247, 240, 0.42);
+  text-underline-offset: 0.4em;
+}
+
+.contactIndex {
+  position: absolute;
+  top: clamp(6rem, 12vw, 10rem);
+  right: 0;
+  display: grid;
+  justify-items: end;
+  gap: 0.3rem;
+  color: rgba(250, 247, 240, 0.5);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+}
+
+.contactIndex span:first-child {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.8;
+  color: rgba(250, 247, 240, 0.12);
+}
+
+.mobileBar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .section {
+    min-height: 86svh;
+  }
+
+  .inner {
+    padding: 6.5rem 0 max(7rem, calc(5rem + env(safe-area-inset-bottom)));
+  }
+
+  .title {
+    max-width: 10ch;
+    font-size: clamp(3.75rem, 18vw, 6rem);
+  }
+
+  .description,
+  .actions {
+    margin-left: 0;
+  }
+
+  .description p {
+    font-size: var(--text-md);
+  }
+
+  .actions {
+    align-items: stretch;
+  }
+
+  .telegram {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .secondary {
+    width: max-content;
+  }
+
+  .contactIndex {
+    top: 2rem;
+  }
+
+  .contactIndex span:first-child {
+    font-size: 4rem;
+  }
+
+  .mobileBar {
+    position: fixed;
+    z-index: var(--z-mobile-cta);
+    left: var(--page-gutter);
+    right: var(--page-gutter);
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    display: block;
+    pointer-events: none;
+  }
+
+  .mobileBar[aria-hidden='false'] {
+    pointer-events: auto;
+  }
+
+  .mobileBar a {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--paper-soft);
+    background: var(--oxblood);
+    color: var(--paper-soft);
+    text-decoration: none;
+    box-shadow: 0 9px 26px rgba(23, 20, 18, 0.19);
+  }
+
+  .mobileBar svg {
+    width: 21px;
+    height: 21px;
+  }
+}
