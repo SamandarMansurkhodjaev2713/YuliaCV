@@ -40,10 +40,10 @@ export function Contact() {
       <motion.div
         className={styles.plane}
         aria-hidden="true"
-        initial={reduceMotion ? false : { scaleY: 0 }}
-        whileInView={reduceMotion ? undefined : { scaleY: 1 }}
+        initial={reduceMotion ? false : { opacity: 0 }}
+        whileInView={reduceMotion ? undefined : { opacity: [0, 0.2, 0] }}
         viewport={{ once: true, amount: 0.12 }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.72, times: [0, 0.35, 1], ease: [0.22, 1, 0.36, 1] }}
       />
       <Container className={styles.inner}>
         <Reveal className={styles.eyebrow} y={10}>

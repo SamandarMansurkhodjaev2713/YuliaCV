@@ -1,5 +1,6 @@
 html {
   overflow-x: clip;
+  scroll-padding-top: 88px;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
@@ -35,7 +36,7 @@ main:focus {
 }
 
 section[id] {
-  scroll-margin-top: 76px;
+  scroll-margin-top: 88px;
 }
 
 .skip-link {

@@ -295,22 +295,6 @@
   pointer-events: none;
 }
 
-.portraitCaption {
-  position: absolute;
-  right: calc(100% - 2.5rem);
-  bottom: 14%;
-  width: 196px;
-  display: grid;
-  gap: 0.28rem;
-  padding: 0.8rem 0.95rem;
-  border: 1px solid var(--ink);
-  background: var(--paper-soft);
-  font-size: 0.65rem;
-  letter-spacing: 0.09em;
-  transform: rotate(-90deg) translateY(-100%);
-  transform-origin: right bottom;
-}
-
 .verticalWord {
   position: absolute;
   top: 14%;
@@ -367,7 +351,6 @@
     padding-left: 0;
   }
 
-  .portraitCaption,
   .verticalWord {
     display: none;
   }

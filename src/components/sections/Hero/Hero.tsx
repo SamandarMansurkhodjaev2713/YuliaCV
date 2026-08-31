@@ -93,11 +93,6 @@ export function Hero() {
               <span>01</span>
             </div>
           </div>
-          <div className={styles.portraitCaption}>
-            <span>ПОЗИЦИОНИРОВАНИЕ</span>
-            <span>ГОЛОС БРЕНДА</span>
-            <span>КОНТЕНТ-СИСТЕМА</span>
-          </div>
           <span className={styles.verticalWord} aria-hidden="true">
             SMM
           </span>
