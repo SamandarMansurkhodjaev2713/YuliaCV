@@ -20,6 +20,7 @@ test.describe('public portfolio', () => {
   });
 
   test('GIVEN a desktop visitor WHEN navigating by anchors THEN the intended section becomes visible', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
     await skipIntro(page);
     await page.goto('./');
 
@@ -67,11 +68,16 @@ test.describe('public portfolio', () => {
   test('GIVEN representative viewports WHEN rendered THEN the document has no horizontal overflow', async ({ page }) => {
     const viewports = [
       { width: 320, height: 568 },
+      { width: 360, height: 800 },
       { width: 375, height: 812 },
       { width: 390, height: 844 },
       { width: 430, height: 932 },
+      { width: 500, height: 900 },
       { width: 768, height: 1024 },
+      { width: 844, height: 390 },
+      { width: 900, height: 1024 },
       { width: 1024, height: 768 },
+      { width: 1280, height: 800 },
       { width: 1440, height: 900 },
     ];
 

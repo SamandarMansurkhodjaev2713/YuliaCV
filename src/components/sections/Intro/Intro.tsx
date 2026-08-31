@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { hasSeenIntro, markIntroSeen } from '../../../lib/introSession';
 import styles from './Intro.module.css';
 
-const INTRO_HOLD_MS = 880;
-const INTRO_EXIT_MS = 500;
+const INTRO_HOLD_MS = 1120;
+const INTRO_EXIT_MS = 480;
 
 export function Intro() {
   const reduceMotion = useReducedMotion();
@@ -55,6 +55,23 @@ export function Intro() {
           exit={{ y: '-100%' }}
           transition={{ duration: INTRO_EXIT_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
         >
+          <motion.div
+            className={styles.metaTop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.28, delay: 0.08 }}
+          >
+            <span>PORTFOLIO / 00</span>
+            <span>ТАШКЕНТ / 2026</span>
+          </motion.div>
+          <motion.span
+            className={styles.signal}
+            initial={{ opacity: 0, scale: 0.92, rotate: -4 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+          >
+            SMM
+          </motion.span>
           <div className={styles.content}>
             <motion.div
               className={styles.mark}
@@ -98,15 +115,29 @@ export function Intro() {
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.52, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
             />
-            <motion.p
-              className={styles.sequence}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.28 }}
-            >
-              СМЫСЛ · ФОРМА · ДЕЙСТВИЕ
-            </motion.p>
+            <div className={styles.sequence}>
+              {['СМЫСЛ', 'СИСТЕМА', 'ДЕЙСТВИЕ'].map((label, index) => (
+                <motion.span
+                  key={label}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.32, delay: 0.24 + index * 0.07 }}
+                >
+                  <i>{String(index + 1).padStart(2, '0')}</i>
+                  {label}
+                </motion.span>
+              ))}
+            </div>
           </div>
+          <motion.div
+            className={styles.metaBottom}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.34 }}
+          >
+            <span>VOICE → CONTENT → ACTION</span>
+            <span>01 — 07</span>
+          </motion.div>
         </motion.div>
       ) : null}
     </AnimatePresence>

@@ -1,8 +1,22 @@
 .section {
+  position: relative;
   padding: var(--section-space) 0;
   background: var(--ink);
   color: var(--paper-soft);
   overflow: clip;
+}
+
+.section::before {
+  content: '02';
+  position: absolute;
+  right: -0.05em;
+  top: 0.16em;
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: clamp(12rem, 30vw, 34rem);
+  line-height: 0.8;
+  -webkit-text-stroke: 1px rgba(250, 247, 240, 0.045);
+  pointer-events: none;
 }
 
 .caseMeta {
@@ -95,6 +109,7 @@
 }
 
 .step {
+  position: relative;
   min-height: min(55vh, 500px);
   display: flex;
   flex-direction: column;
@@ -105,6 +120,19 @@
   transition: color var(--duration-medium) var(--ease-out);
 }
 
+.step::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-5));
+  top: 18%;
+  bottom: 18%;
+  width: 1px;
+  background: var(--oxblood-light);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--duration-medium) var(--ease-out);
+}
+
 .step:first-child {
   border-top: 0;
   padding-top: 0;
@@ -112,6 +140,10 @@
 
 .activeStep {
   color: var(--paper-soft);
+}
+
+.activeStep::before {
+  transform: scaleY(1);
 }
 
 .stepTopline {
@@ -142,8 +174,9 @@
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.04em;
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  text-wrap: balance;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 .step p {
@@ -560,6 +593,11 @@
 
   .step h3 {
     font-size: clamp(2.15rem, 10.5vw, 3.1rem);
+    line-height: 1.01;
+  }
+
+  .step::before {
+    display: none;
   }
 
   .step p {

@@ -1,5 +1,6 @@
 import { Footer } from '../components/layout/Footer/Footer';
 import { Header } from '../components/layout/Header/Header';
+import { PageAtmosphere } from '../components/motion/PageAtmosphere/PageAtmosphere';
 import { About } from '../components/sections/About/About';
 import { CaseStudy } from '../components/sections/CaseStudy/CaseStudy';
 import { Contact, MobileContactBar } from '../components/sections/Contact/Contact';
@@ -18,6 +19,7 @@ export function App() {
       </a>
       <Intro />
       <div id="app-shell">
+        <PageAtmosphere />
         <Header />
         <main id="main-content">
           <Hero />

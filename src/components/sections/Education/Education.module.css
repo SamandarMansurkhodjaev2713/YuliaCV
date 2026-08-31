@@ -1,27 +1,49 @@
 .section {
+  position: relative;
   padding: var(--space-8) 0 var(--section-space);
   background: var(--paper-soft);
+  overflow: clip;
+}
+
+.section::after {
+  content: 'GROWTH / ARCHIVE';
+  position: absolute;
+  right: var(--page-gutter);
+  bottom: var(--space-5);
+  color: rgba(105, 11, 16, 0.36);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
 }
 
 .timeline {
   margin-top: clamp(4rem, 8vw, 8rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--line);
 }
 
 .item {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 3fr 2fr;
-  gap: var(--grid-gap);
-  align-items: baseline;
-  padding: var(--space-6) 0 var(--space-7);
+  grid-template-rows: auto minmax(9rem, 1fr) auto;
+  gap: var(--space-4);
+  min-height: 390px;
+  padding: var(--space-5);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.item:hover {
+  background: var(--paper);
 }
 
 .rule {
-  position: absolute;
-  inset: 0 0 auto;
-  height: 1px;
-  background: var(--line);
-  transform-origin: left;
+  display: none;
 }
 
 .item time {
@@ -32,6 +54,7 @@
 
 .item > div {
   display: grid;
+  align-content: end;
   gap: var(--space-2);
 }
 
@@ -39,7 +62,7 @@
   margin: 0;
   max-width: 22ch;
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 2.8vw, 3rem);
+  font-size: clamp(1.65rem, 2.5vw, 2.8rem);
   font-weight: 400;
   line-height: 1.08;
   letter-spacing: -0.032em;
@@ -55,32 +78,48 @@
 
 .item p {
   margin: 0;
-  max-width: 37ch;
+  max-width: 30ch;
   color: var(--muted-ink);
   line-height: 1.55;
 }
 
 .dot {
   position: absolute;
-  top: -4px;
-  left: calc(25% - 4px);
+  top: -5px;
+  left: var(--space-5);
   width: 9px;
   height: 9px;
   border-radius: 50%;
   background: var(--oxblood);
 }
 
+@media (max-width: 1399px) {
+  .timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .item {
+    min-height: 320px;
+  }
+}
+
 @media (max-width: 767px) {
   .timeline {
     margin-top: var(--space-9);
+    display: block;
     padding-left: 24px;
+    border-top: 0;
     border-left: 1px solid var(--line);
   }
 
   .item {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
     gap: var(--space-3);
+    min-height: 0;
     padding: var(--space-6) 0 var(--space-8) var(--space-3);
+    border-right: 0;
+    background: transparent;
   }
 
   .item h3 {

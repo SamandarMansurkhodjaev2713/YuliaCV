@@ -37,9 +37,16 @@ export function MaskText({ as = 'div', children, className, delay = 0, id }: Mas
   }
   if (as === 'h2') {
     return (
-      <h2 className={classes} id={id}>
+      <motion.h2
+        className={classes}
+        id={id}
+        initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.18 }}
+        transition={{ duration: 0.46, delay, ease: [0.22, 1, 0.36, 1] }}
+      >
         {animatedContent}
-      </h2>
+      </motion.h2>
     );
   }
   return (

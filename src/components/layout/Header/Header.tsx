@@ -54,7 +54,8 @@ export function Header() {
                   className={isActive ? styles.active : undefined}
                   aria-current={isActive ? 'location' : undefined}
                 >
-                  {item.label}
+                  <small>{item.index}</small>
+                  <span>{item.label}</span>
                 </a>
               );
             })}
@@ -79,6 +80,9 @@ export function Header() {
             onClick={() => setIsMenuOpen(true)}
           >
             <span>Меню</span>
+            <small aria-hidden="true">
+              {siteContent.navigation.find((item) => item.href.slice(1) === activeSection)?.index ?? '00'}
+            </small>
             <span className={styles.menuIcon} aria-hidden="true">
               <i />
               <i />

@@ -1,0 +1,101 @@
+.atmosphere {
+  position: fixed;
+  z-index: 35;
+  inset: 0;
+  pointer-events: none;
+}
+
+.progress {
+  position: absolute;
+  z-index: 2;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--oxblood);
+  transform-origin: left;
+}
+
+.leftRule,
+.rightRule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(105, 11, 16, 0.055);
+}
+
+.leftRule {
+  left: var(--page-gutter);
+}
+
+.rightRule {
+  right: var(--page-gutter);
+}
+
+.pointerTrace {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(105, 11, 16, 0.46);
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+.pointerTrace::before,
+.pointerTrace::after {
+  content: '';
+  position: absolute;
+  background: rgba(105, 11, 16, 0.32);
+}
+
+.pointerTrace::before {
+  top: 7px;
+  left: -7px;
+  width: 28px;
+  height: 1px;
+}
+
+.pointerTrace::after {
+  top: -7px;
+  left: 7px;
+  width: 1px;
+  height: 28px;
+}
+
+.rail {
+  position: absolute;
+  top: 50%;
+  right: max(0.4rem, calc(var(--page-gutter) * 0.25));
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: rgba(23, 20, 18, 0.7);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%);
+}
+
+.rail i {
+  width: 1px;
+  height: 38px;
+  background: rgba(105, 11, 16, 0.34);
+}
+
+@media (max-width: 1099px) {
+  .rail,
+  .pointerTrace,
+  .leftRule,
+  .rightRule {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress {
+    display: none;
+  }
+}

@@ -1,6 +1,29 @@
 .section {
+  position: relative;
   padding: var(--section-space) 0;
   background: var(--paper-soft);
+  overflow: clip;
+}
+
+.section::before,
+.section::after {
+  content: '';
+  position: absolute;
+  width: clamp(18rem, 35vw, 34rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(105, 11, 16, 0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.section::before {
+  left: -12%;
+  top: 32%;
+}
+
+.section::after {
+  right: -15%;
+  bottom: 5%;
 }
 
 .timeline {
@@ -30,7 +53,7 @@
 .step {
   position: relative;
   width: 50%;
-  min-height: 175px;
+  min-height: 160px;
   display: flex;
   align-items: center;
 }
@@ -67,6 +90,7 @@
 
 .stepCopy {
   width: 100%;
+  position: relative;
 }
 
 .stepCopy > span {
@@ -82,6 +106,11 @@
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.04em;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.step:hover h3 {
+  color: var(--oxblood);
 }
 
 .step p {
@@ -102,6 +131,11 @@
 @media (max-width: 767px) {
   .timeline {
     padding-left: 32px;
+  }
+
+  .section::before,
+  .section::after {
+    width: 18rem;
   }
 
   .baseLine,
@@ -127,8 +161,8 @@
 
   .step h3 {
     max-width: 100%;
-    overflow-wrap: anywhere;
-    hyphens: auto;
+    overflow-wrap: normal;
+    hyphens: none;
     font-size: clamp(2rem, 10vw, 3rem);
   }
 
