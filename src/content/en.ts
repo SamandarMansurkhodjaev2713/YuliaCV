@@ -91,9 +91,8 @@ export const en = {
     primaryCta: 'Message on Telegram',
     secondaryCta: 'See the UNNI project',
     facts: [
-      { value: '2+', label: 'years working with clients' },
+      { value: '2+', label: 'years in client service' },
       { value: 'Sab Lab', label: 'SMM manager · now' },
-      { value: 'Mini MBA', label: 'programmes, 2026' },
     ],
     strip: ['BRAND', 'AUDIENCE', 'CONTENT', 'ACTION'],
     portraitAlt: 'Yulia Brynskikh, SMM specialist',
@@ -143,7 +142,7 @@ export const en = {
     eyebrow: 'Project',
     title: 'UNNI — from brand character to the logic of communication.',
     summary:
-      'A hands-on K-beauty project within an MBA programme: I brought positioning, visual packaging, a content system, the user path and an operational base together into one solution.',
+      'A hands-on K-beauty project within an MBA programme: I brought positioning, visual packaging, a content system, the path to an order and a strategic base together into one solution.',
     disclaimer: 'Practical project · no invented commercial metrics',
     mediaProject: 'UNNI / SELECTED PROJECT',
     mediaSignature: 'Y.B. / 2026',
@@ -164,7 +163,7 @@ export const en = {
         id: 'funnel',
         title: 'Content and user path',
         text: 'Mapped the Stories and Reels logic: a useful video earns attention, the profile reveals the brand, Highlights answer questions and Direct becomes the natural step to an order.',
-        label: 'REELS → PROFILE → HIGHLIGHTS → DIRECT',
+        label: 'REELS\u00A0→ PROFILE\u00A0→ HIGHLIGHTS\u00A0→ DIRECT',
       },
       {
         id: 'creators',
@@ -178,21 +177,15 @@ export const en = {
         text: 'Ran a SWOT/TOWS analysis, worked through pricing strategies (4P), shaped the USP and segmented the audience with local context in mind — so communication rests on the business, not only on visuals.',
         label: 'SWOT / TOWS / 4P / USP',
       },
-      {
-        id: 'operations',
-        title: 'Operations and HR',
-        text: 'Designed the first-hire strategy for an SMM marketer using the Ulrich model, a motivation system (salary + KPI + growth bonus) and crisis playbooks: currency swings, delivery delays, social platform outages.',
-        label: 'HIRING / KPI / RISK',
-      },
     ],
   },
   experience: {
     eyebrow: 'Experience',
-    title: 'Two years next to the customer — then the move into marketing.',
+    title: 'Two years in client service — then the move into marketing.',
     description:
-      'First — service, objections and live feedback. Then — content, analytics and positioning. It is one path, not two separate ones.',
+      'First — talking to customers face to face: service, objections, live feedback. Now — content, analytics and positioning. It is one path, not two separate ones.',
     totalValue: '2+',
-    totalLabel: 'years working with people and clients',
+    totalLabel: 'years in client service and communication',
     currentTag: 'Now',
     beforeMarketing: 'Before marketing',
     beforeMarketingNote: 'The roles where I learned to hear the customer.',
@@ -206,23 +199,12 @@ export const en = {
         period: 'August 2026 — present',
         location: 'Tashkent',
         current: true,
-        summary: 'Running and growing the company’s social media: from event coverage to analytics.',
+        summary:
+          'Running and growing the company’s social media: from filming at events to analytics and content decisions.',
         highlights: [
           'Fast-turnaround event content and posts on the approved content plan',
           'Copy for posts, stories and publications; briefing and managing the design team',
           'Reach, engagement and pillar analytics; monitoring trends and competitors',
-        ],
-      },
-      {
-        id: 'korean-time',
-        track: 'people',
-        company: 'Korean Time',
-        role: 'Client relations manager',
-        period: 'June — July 2026',
-        summary: 'Language centre: supporting students and parents at every stage of learning.',
-        highlights: [
-          'Feedback, objection handling and client retention',
-          'Choosing the right study format and resolving organisational issues',
         ],
       },
       {
@@ -233,9 +215,23 @@ export const en = {
         period: 'February — June 2026',
         location: 'Tashkent',
         summary:
-          'K-beauty online store: packaging, tone of voice, content funnel, creators and a strategic base built from scratch.',
-        highlights: [],
+          'Built the social media of a K-beauty online store from scratch — from positioning to a clear path to an order.',
+        highlights: [
+          'Positioning, tone of voice and profile packaging',
+          'Content system and user path: Reels\u00A0→ profile\u00A0→ Highlights\u00A0→ Direct',
+          'Creator selection and integration briefs; SWOT/TOWS, 4P and the USP behind the decisions',
+        ],
         linkToCase: true,
+      },
+      {
+        id: 'korean-time',
+        track: 'people',
+        company: 'Korean Time',
+        role: 'Client relations manager',
+        period: 'June — July 2026',
+        summary:
+          'Supported students and parents at a language centre: feedback, objection handling and choosing the right study format.',
+        highlights: [],
       },
       {
         id: 'fidelity',
@@ -243,7 +239,8 @@ export const en = {
         company: 'Fidelity Investment',
         role: 'Office manager',
         period: 'December 2025 — June 2026',
-        summary: 'IT integrator: office operations, handling and routing enquiries, preparing events and meetings.',
+        summary:
+          'Kept the office of an IT integrator running: received and routed enquiries, prepared events and meetings.',
         highlights: [],
       },
       {
@@ -253,7 +250,7 @@ export const en = {
         role: 'Senior administrator',
         period: 'May 2024 — October 2025',
         summary:
-          'Fitness club: consulting members, resolving conflicts, cash desk and reporting, coordinating with staff.',
+          'Handled the client flow of a fitness club: consultations, conflict situations, cash desk, reporting and staff coordination.',
         highlights: [],
         result: 'Customer satisfaction doubled according to reviews; recognised by management for client focus.',
       },
@@ -314,7 +311,7 @@ export const en = {
       'I look at a project not as a content maker but as a strategist: I understand funnels, business processes and product goals. The base — an SMM specialist course and Mini MBA programmes.',
       'I pick up new tools quickly, am not afraid of unconventional tasks and take responsibility for the result.',
     ],
-    facts: ['Tashkent', 'Russian / English', 'SMM + MBA base', 'Open to projects and roles'],
+    facts: ['Tashkent', 'Strategy · content · analytics', 'SMM + MBA base', 'Open to projects and roles'],
   },
   education: {
     eyebrow: 'Education',

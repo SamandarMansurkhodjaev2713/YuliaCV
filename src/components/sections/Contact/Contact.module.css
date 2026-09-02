@@ -22,10 +22,13 @@
   padding: clamp(5.5rem, 10vw, 8.5rem) 0;
 }
 
+/* Aligned under the title's own left edge instead of the page centre: the
+   closing block then reads as one column with the heading rather than as a
+   detached panel with an empty quarter beneath it. */
 .body {
   margin-top: clamp(2rem, 4vw, 3.5rem);
-  margin-left: 50%;
-  max-width: 560px;
+  margin-left: 25.5%;
+  max-width: 620px;
 }
 
 .description p {

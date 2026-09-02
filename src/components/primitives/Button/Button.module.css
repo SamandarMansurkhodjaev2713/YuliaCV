@@ -162,16 +162,18 @@
   color: var(--oxblood);
 }
 
+/* Filled on dark ground: the closing CTA has to read as the strongest element
+   on the page, so the wipe inverts to the ink instead of arriving at it. */
 .primary.tone-paper {
   --button-border: var(--paper-soft);
-  --button-fill: var(--paper-soft);
-  background: transparent;
-  color: var(--paper-soft);
+  --button-fill: var(--ink);
+  background: var(--paper-soft);
+  color: var(--ink);
 }
 
 .primary.tone-paper:hover,
 .primary.tone-paper:focus-visible {
-  color: var(--oxblood);
+  color: var(--paper-soft);
 }
 
 .outline {

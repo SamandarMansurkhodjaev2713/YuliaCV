@@ -36,7 +36,7 @@ export interface MethodItem {
 }
 
 export interface CaseStep {
-  readonly id: 'packaging' | 'voice' | 'funnel' | 'creators' | 'strategy' | 'operations';
+  readonly id: 'packaging' | 'voice' | 'funnel' | 'creators' | 'strategy';
   readonly title: string;
   readonly text: string;
   readonly label: string;

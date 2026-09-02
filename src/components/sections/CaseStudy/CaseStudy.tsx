@@ -131,29 +131,6 @@ function StrategyMedia() {
   );
 }
 
-function OperationsMedia() {
-  const rows: ReadonlyArray<readonly [string, string, string]> = [
-    ['01', 'НАЙМ', 'модель Ульриха · первый SMM-маркетолог'],
-    ['02', 'МОТИВАЦИЯ', 'оклад + KPI + премия от прироста'],
-    ['03', 'АНТИКРИЗИС', 'валюта · поставки · сбои соцсетей'],
-  ];
-  return (
-    <div className={styles.operationsVisual}>
-      <p className={styles.mediaKicker}>OPERATIONS / HR PLAYBOOK</p>
-      <div className={styles.playbook}>
-        {rows.map(([index, title, note]) => (
-          <div key={title} className={styles.playbookRow}>
-            <span>{index}</span>
-            <strong>{title}</strong>
-            <small>{note}</small>
-          </div>
-        ))}
-      </div>
-      <span className={styles.stamp}>READY FOR SCALE</span>
-    </div>
-  );
-}
-
 function MediaContent({ id }: { readonly id: CaseStep['id'] }) {
   switch (id) {
     case 'packaging':
@@ -166,8 +143,6 @@ function MediaContent({ id }: { readonly id: CaseStep['id'] }) {
       return <CreatorsMedia />;
     case 'strategy':
       return <StrategyMedia />;
-    case 'operations':
-      return <OperationsMedia />;
   }
 }
 

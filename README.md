@@ -70,6 +70,16 @@ src/assets/images/yulia-portrait.webp
 
 Keep the same aspect ratios or re-check all visual snapshots.
 
+The hero renders the photograph as a warm monochrome with a vignette (`Hero.module.css`). The source is an event frame whose acid-yellow banner and cold hall background fight the paper palette; dropping the colour keeps oxblood as the only accent on the page. A cleaner original may need less of that treatment — re-check the filter and the vignette when the photo is replaced.
+
+The share card is generated from the same portrait and the same hero copy:
+
+```bash
+npm run og   # rewrites public/og-image.png
+```
+
+Re-run it after replacing the portrait or changing the hero wording.
+
 ## GitHub Pages deployment
 
 1. Push the repository to GitHub with the default branch named `main`.

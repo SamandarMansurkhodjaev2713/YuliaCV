@@ -125,12 +125,12 @@ export function Hero() {
             <motion.img
               src={portraitUrl}
               alt={content.hero.portraitAlt}
-              width="960"
-              height="1200"
+              width="720"
+              height="1080"
               fetchPriority="high"
               style={{ y: imageY }}
-              initial={reduceMotion ? false : { scale: 1.1 }}
-              animate={reduceMotion ? undefined : ready ? { scale: 1.04 } : { scale: 1.1 }}
+              initial={reduceMotion ? false : { scale: 1.08 }}
+              animate={reduceMotion ? undefined : ready ? { scale: 1 } : { scale: 1.08 }}
               transition={{ duration: 1.3, delay: 0.16, ease: EASE }}
             />
             <div className={styles.imageIndex} aria-hidden="true">
