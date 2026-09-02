@@ -6,7 +6,8 @@ The project is a static, single-page portfolio. It has no backend, database, CMS
 
 ## Boundaries
 
-- `src/content` is the typed source of truth for copy and contact links.
+- `src/content` is the typed source of truth for copy and contact links, one file per locale (`ru.ts`, `en.ts`) sharing `SiteContent`.
+- `src/i18n` owns the active locale: provider, persistence, `<html lang>` and document title.
 - `src/components/sections` owns page-level compositions.
 - `src/components/layout` owns global navigation and footer.
 - `src/components/motion` contains reusable motion primitives only.

@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { siteContent } from '../../../content/site';
 import { useActiveSection } from '../../../hooks/useActiveSection';
-import { ArrowIcon } from '../../primitives/ArrowIcon/ArrowIcon';
-import { Container } from '../../primitives/Container/Container';
+import { useLocale } from '../../../i18n/useLocale';
+import { chapterLabel } from '../../../lib/sections';
+import { Button } from '../../primitives/Button/Button';
+import { LocaleSwitch } from '../LocaleSwitch/LocaleSwitch';
 import { MobileMenu } from '../MobileMenu/MobileMenu';
 import styles from './Header.module.css';
 
 export function Header() {
+  const { content } = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -37,39 +39,42 @@ export function Header() {
   return (
     <>
       <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
-        <Container className={styles.inner}>
-          <a className={styles.brand} href="#hero" aria-label="Юлия Брынских. На начало страницы">
+        <div className={styles.inner}>
+          <a className={styles.brand} href="#hero" aria-label={content.ui.brandAria}>
             <strong aria-hidden="true">YB</strong>
-            <span>ЮЛИЯ БРЫНСКИХ · SMM-СТРАТЕГ</span>
+            <span>{content.ui.brandLine}</span>
           </a>
 
-          <nav className={styles.navigation} aria-label="Основная навигация">
-            {siteContent.navigation.map((item) => {
-              const sectionId = item.href.slice(1);
-              const isActive = activeSection === sectionId;
+          <nav className={styles.navigation} aria-label={content.ui.mainNavAria}>
+            {content.navigation.map((item) => {
+              const isActive = activeSection === item.section;
               return (
                 <a
-                  key={item.href}
-                  href={item.href}
+                  key={item.section}
+                  href={`#${item.section}`}
                   className={isActive ? styles.active : undefined}
                   aria-current={isActive ? 'location' : undefined}
                 >
-                  <small>{item.index}</small>
+                  <small>{chapterLabel(item.section)}</small>
                   <span>{item.label}</span>
                 </a>
               );
             })}
           </nav>
 
-          <a
-            className={styles.contact}
-            href={siteContent.contacts.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
-          >
-            Написать <ArrowIcon />
-          </a>
+          <div className={styles.tools}>
+            <LocaleSwitch className={styles.locale} />
+            <Button
+              className={styles.contact}
+              variant="outline"
+              size="sm"
+              href={content.contacts.telegram}
+              external
+              aria-label={content.ui.telegramAria}
+            >
+              {content.ui.headerCta}
+            </Button>
+          </div>
 
           <button
             ref={menuButtonRef}
@@ -79,16 +84,14 @@ export function Header() {
             aria-controls="mobile-menu"
             onClick={() => setIsMenuOpen(true)}
           >
-            <span>Меню</span>
-            <small aria-hidden="true">
-              {siteContent.navigation.find((item) => item.href.slice(1) === activeSection)?.index ?? '00'}
-            </small>
+            <span>{content.ui.menu}</span>
+            <small aria-hidden="true">{activeSection ? chapterLabel(activeSection) : '00'}</small>
             <span className={styles.menuIcon} aria-hidden="true">
               <i />
               <i />
             </span>
           </button>
-        </Container>
+        </div>
       </header>
       <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
     </>

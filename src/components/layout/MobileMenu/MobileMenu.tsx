@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { siteContent } from '../../../content/site';
+import { useLocale } from '../../../i18n/useLocale';
+import { chapterLabel } from '../../../lib/sections';
 import { ArrowIcon } from '../../primitives/ArrowIcon/ArrowIcon';
+import { LocaleSwitch } from '../LocaleSwitch/LocaleSwitch';
 import styles from './MobileMenu.module.css';
 
 interface MobileMenuProps {
@@ -9,6 +11,7 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const { content } = useLocale();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const restoreFocusRef = useRef(true);
 
@@ -68,24 +71,24 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <div className={styles.panel}>
         <div className={styles.topline}>
           <p id="mobile-menu-title" className={styles.wordmark}>
-            ЮЛИЯ <span>/ MENU</span>
+            {content.hero.titleFirst} <span>/ {content.ui.menu}</span>
           </p>
           <button className={styles.close} type="button" onClick={() => dialogRef.current?.close()}>
-            <span>Закрыть</span>
+            <span>{content.ui.close}</span>
             <span className={styles.closeMark} aria-hidden="true" />
           </button>
         </div>
 
-        <nav className={styles.navigation} aria-label="Мобильная навигация">
-          {siteContent.navigation.map((item, index) => (
+        <nav className={styles.navigation} aria-label={content.ui.mobileNavAria}>
+          {content.navigation.map((item, index) => (
             <a
-              key={item.href}
+              key={item.section}
               className={styles.navLink}
-              href={item.href}
+              href={`#${item.section}`}
               onClick={closeFromLink}
-              style={{ animationDelay: `${index * 55 + 130}ms` }}
+              style={{ animationDelay: `${index * 50 + 120}ms` }}
             >
-              <span>{item.index}</span>
+              <span>{chapterLabel(item.section)}</span>
               <strong>{item.label}</strong>
               <ArrowIcon />
             </a>
@@ -93,25 +96,28 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </nav>
 
         <div className={styles.bottom}>
-          <a
-            href={siteContent.contacts.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
-          >
-            Telegram <ArrowIcon />
-          </a>
-          {siteContent.contacts.instagram ? (
+          <div className={styles.links}>
             <a
-              href={siteContent.contacts.instagram}
+              href={content.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Открыть Instagram Юлии, откроется в новой вкладке"
+              aria-label={content.ui.telegramAria}
             >
-              Instagram <ArrowIcon />
+              Telegram <ArrowIcon />
             </a>
-          ) : null}
-          <p>Ташкент · 2026</p>
+            <a href={`mailto:${content.contacts.email}`} aria-label={content.ui.emailAria}>
+              Email <ArrowIcon />
+            </a>
+            <a href={content.contacts.cv} target="_blank" rel="noopener noreferrer" aria-label={content.ui.cvAria}>
+              CV <ArrowIcon />
+            </a>
+          </div>
+          <div className={styles.meta}>
+            <p>
+              {content.ui.footerCity} · {new Date().getFullYear()}
+            </p>
+            <LocaleSwitch tone="paper" />
+          </div>
         </div>
       </div>
     </dialog>

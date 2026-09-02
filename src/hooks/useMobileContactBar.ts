@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+/** Shows the floating Telegram bar between the hero and the contact block. */
 export function useMobileContactBar(): boolean {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -28,7 +29,7 @@ export function useMobileContactBar(): boolean {
         contactVisible = entry.isIntersecting;
         update();
       },
-      { threshold: 0.05 },
+      { rootMargin: '0px 0px 120px 0px', threshold: 0.01 },
     );
 
     heroObserver.observe(hero);

@@ -40,13 +40,17 @@ npm run check
 
 ## Content editing
 
-All public copy and contact data live in:
+All public copy and contact data live in two locale files that share one type:
 
 ```text
-src/content/site.ts
+src/content/ru.ts   # default
+src/content/en.ts
+src/content/types.ts
 ```
 
-The Telegram URL is configured. `contacts.instagram` is intentionally `null` until a real profile URL is confirmed. Once supplied, set it to a valid `https://instagram.com/...` URL; the Contact, mobile menu, and Footer links will appear automatically.
+Section order and chapter numbering come from `SECTION_ORDER` in `types.ts`; navigation, the story-progress bar and the folio derive from it. The visitor's language choice is kept in `localStorage` (`yulia-portfolio:locale`).
+
+Telegram and email are configured. `contacts.instagram` is intentionally `null` until a real profile URL is confirmed.
 
 The CV is stored at:
 
@@ -58,11 +62,10 @@ Replace it with an updated file under the same name to preserve links.
 
 ## Photography
 
-Current portrait assets were derived from the supplied CV image and are suitable as a layout-complete fallback. Replace these files with full-resolution originals before the final public launch when available:
+The portrait was derived from the supplied CV image and is suitable as a layout-complete fallback. Replace it with a full-resolution original before the final public launch when available:
 
 ```text
 src/assets/images/yulia-portrait.webp
-src/assets/images/yulia-working-detail.webp
 ```
 
 Keep the same aspect ratios or re-check all visual snapshots.
@@ -97,7 +100,8 @@ Without that variable, the post-build script derives the standard GitHub Pages U
 - Prata for display typography and Onest for body/interface text.
 - No gradient blobs, glass cards, generic bento grids, custom cursor, scroll hijacking, 3D tilt, fake metrics, or fake testimonials.
 - Motion is built from mask reveals, line drawing, media transitions, and small link interactions.
-- Reduced motion is fully supported.
+- The intro ("from noise to meaning") plays once per session, is skippable by click/Esc, and hands the name over to the hero title.
+- Reduced motion is fully supported: the intro is skipped and scroll effects collapse to static layout.
 
 ## Project structure
 
@@ -110,8 +114,9 @@ src/
 │   ├── motion/
 │   ├── primitives/
 │   └── sections/
-├── content/
+├── content/      # ru.ts, en.ts, types.ts
 ├── hooks/
+├── i18n/         # locale provider and persistence
 ├── lib/
 └── styles/
 ```

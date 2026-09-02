@@ -1,35 +1,14 @@
 .section {
   position: relative;
   padding: var(--section-space) 0;
-  background: var(--paper-soft);
+  background: var(--paper);
   overflow: clip;
-}
-
-.section::before,
-.section::after {
-  content: '';
-  position: absolute;
-  width: clamp(18rem, 35vw, 34rem);
-  aspect-ratio: 1;
-  border: 1px solid rgba(105, 11, 16, 0.07);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.section::before {
-  left: -12%;
-  top: 32%;
-}
-
-.section::after {
-  right: -15%;
-  bottom: 5%;
 }
 
 .timeline {
   position: relative;
-  margin-top: clamp(4rem, 8vw, 8rem);
-  padding-block: var(--space-5);
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+  padding-block: var(--space-4);
 }
 
 .baseLine,
@@ -53,7 +32,7 @@
 .step {
   position: relative;
   width: 50%;
-  min-height: 160px;
+  min-height: 140px;
   display: flex;
   align-items: center;
 }
@@ -73,7 +52,7 @@
   top: 50%;
   width: 11px;
   height: 11px;
-  border: 2px solid var(--paper-soft);
+  border: 2px solid var(--paper);
   border-radius: 50%;
   background: var(--oxblood);
   box-shadow: 0 0 0 1px var(--oxblood);
@@ -102,7 +81,7 @@
 .step h3 {
   margin: var(--space-3) 0 0;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.7vw, 4.1rem);
+  font-size: clamp(2rem, 3.5vw, 3.8rem);
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.04em;
@@ -114,7 +93,8 @@
 }
 
 .step p {
-  margin: var(--space-4) 0 0;
+  margin: var(--space-3) 0 0;
+  max-width: 39ch;
   color: var(--muted-ink);
   font-size: var(--text-md);
   line-height: 1.52;
@@ -124,18 +104,10 @@
   margin-left: auto;
 }
 
-.step p {
-  max-width: 39ch;
-}
-
 @media (max-width: 767px) {
   .timeline {
-    padding-left: 32px;
-  }
-
-  .section::before,
-  .section::after {
-    width: 18rem;
+    margin-top: var(--space-6);
+    padding-left: 28px;
   }
 
   .baseLine,
@@ -149,13 +121,13 @@
     width: 100%;
     min-height: 0;
     margin-left: 0;
-    padding: var(--space-7) 0 var(--space-8) var(--space-5);
+    padding: var(--space-5) 0 var(--space-5) var(--space-4);
     text-align: left;
   }
 
   .left .dot,
   .right .dot {
-    left: -32px;
+    left: -28px;
     right: auto;
   }
 
@@ -163,7 +135,7 @@
     max-width: 100%;
     overflow-wrap: normal;
     hyphens: none;
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
   }
 
   .step p,

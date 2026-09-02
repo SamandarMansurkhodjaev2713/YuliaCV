@@ -1,13 +1,17 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import { siteContent } from '../../../content/site';
-import type { CaseStep } from '../../../content/types';
+import type { CaseStep, SiteContent } from '../../../content/types';
+import { useLocale } from '../../../i18n/useLocale';
+import { pad } from '../../../lib/sections';
 import { Container } from '../../primitives/Container/Container';
 import { SectionHeading } from '../../primitives/SectionHeading/SectionHeading';
 import styles from './CaseStudy.module.css';
 
-interface CaseMediaProps {
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+interface MediaProps {
   readonly step: CaseStep;
+  readonly caseStudy: SiteContent['caseStudy'];
   readonly animated?: boolean;
 }
 
@@ -40,7 +44,6 @@ function PackagingMedia() {
           <span className={styles.feedProduct}>02</span>
         </div>
       </div>
-      <p className={styles.sideCaption}>PROFILE / HIGHLIGHTS / VISUAL</p>
     </div>
   );
 }
@@ -56,7 +59,6 @@ function VoiceMedia() {
         <span>БЕЗ ДАВЛЕНИЯ</span>
         <span>С УЧЁТОМ КОНТЕКСТА</span>
       </div>
-      <p className={styles.voiceFootnote}>Помочь с выбором — раньше, чем предложить покупку.</p>
     </div>
   );
 }
@@ -69,17 +71,23 @@ function FunnelMedia() {
       <div className={styles.funnelPath}>
         {labels.map((label, index) => (
           <div key={label} className={styles.funnelNode}>
-            <span>{String(index + 1).padStart(2, '0')}</span>
+            <span>{pad(index + 1)}</span>
             <strong>{label}</strong>
           </div>
         ))}
       </div>
-      <p className={styles.funnelNote}>Контент не заканчивается просмотром — он подсказывает следующий шаг.</p>
     </div>
   );
 }
 
 function CreatorsMedia() {
+  const rows: ReadonlyArray<readonly [string, string]> = [
+    ['Ниша', 'K-beauty / уход'],
+    ['Аудитория', 'релевантность'],
+    ['Проверка', 'аномалии / накрутки'],
+    ['Формат', 'нативная интеграция'],
+    ['ТЗ', 'смысл / кадр / CTA'],
+  ];
   return (
     <div className={styles.creatorsVisual}>
       <p className={styles.mediaKicker}>CREATOR SELECTION / BRIEF</p>
@@ -88,13 +96,7 @@ function CreatorsMedia() {
           <strong>UNNI / CREATOR FIT</strong>
           <span>04</span>
         </div>
-        {[
-          ['Ниша', 'K-beauty / уход'],
-          ['Аудитория', 'релевантность'],
-          ['Проверка', 'аномалии / накрутки'],
-          ['Формат', 'нативная интеграция'],
-          ['ТЗ', 'смысл / кадр / CTA'],
-        ].map(([term, value]) => (
+        {rows.map(([term, value]) => (
           <div key={term} className={styles.sheetRow}>
             <span>{term}</span>
             <strong>{value}</strong>
@@ -107,32 +109,47 @@ function CreatorsMedia() {
 }
 
 function StrategyMedia() {
+  const cells: ReadonlyArray<readonly [string, string]> = [
+    ['SWOT', 'сильные стороны / риски'],
+    ['TOWS', 'связь анализа и действий'],
+    ['4P', 'продукт / цена / место / продвижение'],
+    ['USP', 'понятное отличие бренда'],
+  ];
   return (
     <div className={styles.strategyVisual}>
       <p className={styles.mediaKicker}>STRATEGY BASE / LOCAL CONTEXT</p>
       <div className={styles.strategyGrid}>
-        <div>
-          <span>01</span>
-          <strong>SWOT</strong>
-          <small>сильные стороны / риски</small>
-        </div>
-        <div>
-          <span>02</span>
-          <strong>TOWS</strong>
-          <small>связь анализа и действий</small>
-        </div>
-        <div>
-          <span>03</span>
-          <strong>4P</strong>
-          <small>продукт / цена / место / продвижение</small>
-        </div>
-        <div>
-          <span>04</span>
-          <strong>USP</strong>
-          <small>понятное отличие бренда</small>
-        </div>
+        {cells.map(([title, note], index) => (
+          <div key={title}>
+            <span>{pad(index + 1)}</span>
+            <strong>{title}</strong>
+            <small>{note}</small>
+          </div>
+        ))}
       </div>
-      <p className={styles.strategyFootnote}>Визуал получает опору в бизнес-контексте.</p>
+    </div>
+  );
+}
+
+function OperationsMedia() {
+  const rows: ReadonlyArray<readonly [string, string, string]> = [
+    ['01', 'НАЙМ', 'модель Ульриха · первый SMM-маркетолог'],
+    ['02', 'МОТИВАЦИЯ', 'оклад + KPI + премия от прироста'],
+    ['03', 'АНТИКРИЗИС', 'валюта · поставки · сбои соцсетей'],
+  ];
+  return (
+    <div className={styles.operationsVisual}>
+      <p className={styles.mediaKicker}>OPERATIONS / HR PLAYBOOK</p>
+      <div className={styles.playbook}>
+        {rows.map(([index, title, note]) => (
+          <div key={title} className={styles.playbookRow}>
+            <span>{index}</span>
+            <strong>{title}</strong>
+            <small>{note}</small>
+          </div>
+        ))}
+      </div>
+      <span className={styles.stamp}>READY FOR SCALE</span>
     </div>
   );
 }
@@ -149,21 +166,24 @@ function MediaContent({ id }: { readonly id: CaseStep['id'] }) {
       return <CreatorsMedia />;
     case 'strategy':
       return <StrategyMedia />;
+    case 'operations':
+      return <OperationsMedia />;
   }
 }
 
-function CaseMedia({ step, animated = false }: CaseMediaProps) {
+function CaseMedia({ step, caseStudy, animated = false }: MediaProps) {
   const reduceMotion = useReducedMotion();
+  const index = pad(caseStudy.steps.findIndex((item) => item.id === step.id) + 1);
   const content = (
     <div className={styles.mediaSurface}>
       <div className={styles.mediaTopline}>
-        <span>UNNI / SELECTED PROJECT</span>
-        <span>{step.number}</span>
+        <span>{caseStudy.mediaProject}</span>
+        <span>{index}</span>
       </div>
       <MediaContent id={step.id} />
       <div className={styles.mediaBottomline}>
         <span>{step.label}</span>
-        <span>Y.B. / 2026</span>
+        <span>{caseStudy.mediaSignature}</span>
       </div>
     </div>
   );
@@ -176,7 +196,7 @@ function CaseMedia({ step, animated = false }: CaseMediaProps) {
       initial={{ opacity: 0, y: 14, scale: 0.992 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -8, scale: 0.996 }}
-      transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.36, ease: EASE }}
     >
       {content}
     </motion.div>
@@ -184,7 +204,9 @@ function CaseMedia({ step, animated = false }: CaseMediaProps) {
 }
 
 export function CaseStudy() {
-  const firstStep = siteContent.caseStudy.steps.at(0);
+  const { content } = useLocale();
+  const { caseStudy } = content;
+  const firstStep = caseStudy.steps[0];
   const [activeId, setActiveId] = useState<CaseStep['id']>(firstStep?.id ?? 'packaging');
   const stepRefs = useRef<Array<HTMLElement | null>>([]);
   const reduceMotion = useReducedMotion();
@@ -199,28 +221,35 @@ export function CaseStudy() {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         const id = visible?.target.getAttribute('data-step-id');
-        const matchingStep = siteContent.caseStudy.steps.find((step) => step.id === id);
+        const matchingStep = caseStudy.steps.find((step) => step.id === id);
         if (matchingStep) setActiveId(matchingStep.id);
       },
-      { rootMargin: '-26% 0px -45% 0px', threshold: [0.05, 0.2, 0.45, 0.7] },
+      { rootMargin: '-28% 0px -42% 0px', threshold: [0.05, 0.2, 0.45, 0.7] },
     );
 
     nodes.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
-  }, []);
+  }, [caseStudy.steps]);
 
-  const activeStep = siteContent.caseStudy.steps.find((step) => step.id === activeId) ?? firstStep;
+  const activeStep = caseStudy.steps.find((step) => step.id === activeId) ?? firstStep;
   if (!activeStep) return null;
 
   return (
-    <section id="case" className={styles.section} aria-labelledby="case-title">
+    <section
+      id="case"
+      className={styles.section}
+      aria-labelledby="case-title"
+      data-chapter="case"
+      data-tone="dark"
+    >
       <Container>
         <SectionHeading
+          section="case"
           inverse
-          eyebrow={siteContent.caseStudy.eyebrow}
-          title={siteContent.caseStudy.title}
-          description={siteContent.caseStudy.summary}
-          id="case-title"
+          eyebrow={caseStudy.eyebrow}
+          title={caseStudy.title}
+          description={caseStudy.summary}
+          titleId="case-title"
         />
 
         <div className={styles.caseMeta}>
@@ -228,20 +257,20 @@ export function CaseStudy() {
             initial={reduceMotion ? false : { scaleX: 0 }}
             whileInView={reduceMotion ? undefined : { scaleX: 1 }}
             viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, ease: EASE }}
           />
-          <p>{siteContent.caseStudy.disclaimer}</p>
+          <p>{caseStudy.disclaimer}</p>
         </div>
 
         <div className={styles.layout}>
           <div className={styles.desktopMedia}>
             <AnimatePresence mode="wait" initial={false}>
-              <CaseMedia key={activeStep.id} step={activeStep} animated />
+              <CaseMedia key={activeStep.id} step={activeStep} caseStudy={caseStudy} animated />
             </AnimatePresence>
           </div>
 
           <div className={styles.steps}>
-            {siteContent.caseStudy.steps.map((step, index) => {
+            {caseStudy.steps.map((step, index) => {
               const isActive = step.id === activeId;
               return (
                 <article
@@ -255,18 +284,18 @@ export function CaseStudy() {
                   <motion.div
                     initial={reduceMotion ? false : { opacity: 0, y: 18 }}
                     whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.35 }}
-                    transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.62, ease: EASE }}
                   >
                     <div className={styles.stepTopline}>
-                      <span>{step.number}</span>
+                      <span>{pad(index + 1)}</span>
                       <small>{step.label}</small>
                     </div>
                     <h3>{step.title}</h3>
-                    <p>{step.text}</p>
+                    <p className={styles.stepText}>{step.text}</p>
                   </motion.div>
                   <div className={styles.mobileMedia}>
-                    <CaseMedia step={step} />
+                    <CaseMedia step={step} caseStudy={caseStudy} />
                   </div>
                 </article>
               );

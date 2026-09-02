@@ -1,25 +1,12 @@
 .section {
   position: relative;
   padding: var(--section-space) 0;
-  background: var(--paper);
+  background: var(--paper-soft);
   overflow: clip;
 }
 
-.section::before {
-  content: 'CONTENT / MATRIX';
-  position: absolute;
-  right: var(--page-gutter);
-  top: 50%;
-  color: rgba(105, 11, 16, 0.28);
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  writing-mode: vertical-rl;
-  transform: translateY(-50%);
-}
-
 .list {
-  margin-top: clamp(4rem, 8vw, 8rem);
+  margin-top: clamp(3rem, 6vw, 5.5rem);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   border-top: 1px solid var(--line);
@@ -28,22 +15,33 @@
 
 .item {
   position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr) 24px;
   grid-template-rows: auto 1fr;
   align-items: start;
-  gap: var(--space-5);
-  min-height: 230px;
+  gap: var(--space-4) var(--space-5);
+  min-height: 220px;
   padding: var(--space-6);
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  transition:
-    color var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
-.rule {
-  display: none;
+.item::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--paper);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.item:hover::before {
+  transform: scaleY(1);
+  transform-origin: top;
 }
 
 .number {
@@ -53,15 +51,16 @@
 }
 
 .item h3 {
+  min-width: 0;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 3.2rem);
+  font-size: clamp(1.7rem, 2.8vw, 3rem);
   font-weight: 400;
   line-height: 1.04;
   letter-spacing: -0.035em;
-  overflow-wrap: normal;
-  hyphens: none;
-  transition: transform var(--duration-fast) var(--ease-out);
+  overflow-wrap: anywhere;
+  hyphens: manual;
+  transition: transform var(--duration-medium) var(--ease-out-expo);
 }
 
 .item p {
@@ -80,7 +79,7 @@
   opacity: 0.45;
   transition:
     opacity var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
+    transform var(--duration-medium) var(--ease-out-expo);
 }
 
 .item:hover h3 {
@@ -88,7 +87,6 @@
 }
 
 .item:hover {
-  background: var(--paper-soft);
   color: var(--oxblood);
 }
 
@@ -98,7 +96,7 @@
 }
 
 .footnote {
-  margin-top: var(--space-10);
+  margin-top: var(--space-9);
   margin-left: calc((100% + var(--grid-gap)) / 12 * 7);
   padding-top: var(--space-4);
   border-top: 1px solid var(--ink);
@@ -133,8 +131,12 @@
     border-right: 0;
   }
 
+  .item::before {
+    inset: 0 calc(-1 * var(--page-gutter));
+  }
+
   .item h3 {
-    font-size: clamp(1.85rem, 3.4vw, 2.65rem);
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
   }
 
   .item p {
@@ -148,45 +150,31 @@
 
 @media (max-width: 767px) {
   .list {
-    margin-top: var(--space-9);
+    margin-top: var(--space-6);
   }
 
   .item {
-    grid-template-columns: 36px minmax(0, 1fr) 22px;
-    gap: var(--space-3);
-    padding: var(--space-6) 0;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: var(--space-2) var(--space-3);
+    padding: var(--space-5) 0;
   }
 
   .item h3 {
-    font-size: clamp(1.72rem, 8.2vw, 2.3rem);
+    font-size: clamp(1.55rem, 7vw, 2.1rem);
   }
 
   .item p {
-    grid-column: 2 / -1;
-    min-width: 0;
-    margin-top: var(--space-2);
-    overflow-wrap: normal;
-    hyphens: none;
+    grid-column: 2;
+    margin-top: var(--space-1);
     font-size: var(--text-base);
   }
 
-  .section::before {
-    display: none;
-  }
-
   .arrow {
-    grid-column: 3;
-    grid-row: 1;
+    display: none;
   }
 
   .footnote {
     margin-left: 0;
-    margin-top: var(--space-8);
-  }
-}
-
-@media (hover: none) {
-  .arrow {
-    opacity: 0.8;
+    margin-top: var(--space-7);
   }
 }

@@ -1,0 +1,56 @@
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.switch button {
+  position: relative;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0 0.35rem;
+  border: 0;
+  background: transparent;
+  color: var(--muted-ink);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.switch button::after {
+  content: '';
+  position: absolute;
+  inset: auto 0.35rem 0.35rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-medium) var(--ease-out-expo);
+}
+
+.switch button:hover,
+.switch button:focus-visible {
+  color: var(--ink);
+}
+
+.switch button.active {
+  color: var(--oxblood);
+}
+
+.switch button.active::after,
+.switch button:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.paper button {
+  color: rgba(var(--paper-soft-rgb), 0.6);
+}
+
+.paper button:hover,
+.paper button:focus-visible,
+.paper button.active {
+  color: var(--paper-soft);
+}

@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 const INTRO_KEY = 'yulia-portfolio:intro-seen';
+const LOCALE_KEY = 'yulia-portfolio:locale';
 
 async function skipIntro(page: Page) {
   await page.addInitScript((key) => window.sessionStorage.setItem(key, '1'), INTRO_KEY);
@@ -16,7 +17,13 @@ test.describe('public portfolio', () => {
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Юлия');
     const telegramLink = page.getByRole('link', { name: /Написать в Telegram/i }).first();
     await expect(telegramLink).toHaveAttribute('href', 'https://t.me/yulleishn');
-    await expect(page.getByRole('heading', { name: /UNNI/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Написать на почту/i }).first()).toHaveAttribute(
+      'href',
+      'mailto:theyullek4@mail.ru',
+    );
+    await expect(page.getByRole('heading', { level: 2, name: /UNNI/i })).toBeVisible();
+    await expect(page.locator('#experience')).toContainText('Sab Lab');
+    await expect(page.locator('#experience')).toContainText('WillPower');
   });
 
   test('GIVEN a desktop visitor WHEN navigating by anchors THEN the intended section becomes visible', async ({ page }) => {
@@ -24,9 +31,30 @@ test.describe('public portfolio', () => {
     await skipIntro(page);
     await page.goto('./');
 
-    await page.getByRole('navigation', { name: 'Основная навигация' }).getByRole('link', { name: 'Проект' }).click();
+    const navigation = page.getByRole('navigation', { name: 'Основная навигация' });
+    await navigation.getByRole('link', { name: 'Проект' }).click();
     await expect(page).toHaveURL(/#case$/);
     await expect(page.locator('#case')).toBeInViewport();
+
+    await navigation.getByRole('link', { name: 'Опыт' }).click();
+    await expect(page).toHaveURL(/#experience$/);
+    await expect(page.locator('#experience')).toBeInViewport();
+  });
+
+  test('GIVEN a visitor WHEN switching the language THEN copy, html lang and title follow and the choice persists', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await skipIntro(page);
+    await page.goto('./');
+
+    await page.getByRole('group', { name: 'Язык сайта' }).getByRole('button', { name: 'EN' }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Yulia');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page).toHaveTitle(/Yulia Brynskikh/);
+    await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Experience' })).toBeVisible();
+
+    await page.reload();
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Yulia');
+    expect(await page.evaluate((key) => window.localStorage.getItem(key), LOCALE_KEY)).toBe('en');
   });
 
   test('GIVEN a mobile visitor WHEN opening and closing the menu THEN focus and navigation remain accessible', async ({ page }) => {
@@ -39,6 +67,7 @@ test.describe('public portfolio', () => {
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
     await expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+    await expect(dialog.getByRole('link', { name: 'Опыт' })).toBeVisible();
 
     await page.keyboard.press('Escape');
     await expect(dialog).not.toBeVisible();
@@ -50,10 +79,21 @@ test.describe('public portfolio', () => {
     await page.goto('./');
     const intro = page.getByTestId('intro-overlay');
     await expect(intro).toBeVisible();
-    await expect(intro).toBeHidden({ timeout: 3_000 });
+    await expect(intro).toHaveAttribute('data-phase', 'handoff', { timeout: 6_000 });
+    await expect(intro).toHaveCount(0, { timeout: 3_000 });
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 
     await page.reload();
     await expect(page.getByTestId('intro-overlay')).toHaveCount(0);
+  });
+
+  test('GIVEN the first visit WHEN the visitor clicks the intro THEN it is skipped quickly', async ({ page }) => {
+    await page.goto('./');
+    const intro = page.getByTestId('intro-overlay');
+    await expect(intro).toBeVisible();
+    await intro.click({ position: { x: 20, y: 20 }, force: true });
+    await expect(intro).toHaveCount(0, { timeout: 2_500 });
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   });
 
   test('GIVEN reduced motion WHEN loaded THEN content remains available without requiring animation', async ({ page }) => {
@@ -79,6 +119,7 @@ test.describe('public portfolio', () => {
       { width: 1024, height: 768 },
       { width: 1280, height: 800 },
       { width: 1440, height: 900 },
+      { width: 1920, height: 1080 },
     ];
 
     await skipIntro(page);

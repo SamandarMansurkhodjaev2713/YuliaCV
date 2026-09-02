@@ -1,17 +1,50 @@
-.atmosphere {
+/* Story-style progress: one segment per chapter, above the header. */
+.stories {
+  --track: rgba(var(--ink-rgb), 0.16);
+  --fill: var(--oxblood);
+
   position: fixed;
-  z-index: 35;
-  inset: 0;
+  z-index: calc(var(--z-header) + 1);
+  inset: 0 0 auto;
+  display: flex;
+  gap: 4px;
+  padding: 0 var(--page-gutter);
   pointer-events: none;
+  transition: opacity var(--duration-medium) var(--ease-out);
 }
 
-.progress {
-  position: absolute;
-  z-index: 2;
-  inset: 0 0 auto;
+.stories[data-tone='dark'] {
+  --track: rgba(var(--paper-soft-rgb), 0.22);
+  --fill: var(--paper-soft);
+}
+
+.segment {
+  position: relative;
+  flex: 1;
   height: 2px;
-  background: var(--oxblood);
+  background: var(--track);
+  overflow: hidden;
+  transition: background-color var(--duration-medium) var(--ease-out);
+}
+
+.segment[data-state='done'] {
+  background: var(--fill);
+}
+
+.segment i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--fill);
   transform-origin: left;
+  transition: background-color var(--duration-medium) var(--ease-out);
+}
+
+.atmosphere {
+  position: fixed;
+  z-index: var(--z-atmosphere);
+  inset: 0;
+  pointer-events: none;
 }
 
 .leftRule,
@@ -20,7 +53,13 @@
   top: 0;
   bottom: 0;
   width: 1px;
-  background: rgba(105, 11, 16, 0.055);
+  background: rgba(var(--oxblood-rgb), 0.055);
+  transition: background-color var(--duration-medium) var(--ease-out);
+}
+
+.atmosphere[data-tone='dark'] .leftRule,
+.atmosphere[data-tone='dark'] .rightRule {
+  background: rgba(var(--paper-soft-rgb), 0.06);
 }
 
 .leftRule {
@@ -31,62 +70,93 @@
   right: var(--page-gutter);
 }
 
+/* Pointer trace: a story ring that follows the cursor and opens over links. */
 .pointerTrace {
   position: absolute;
-  top: -8px;
-  left: -8px;
-  width: 16px;
-  height: 16px;
-  border: 1px solid rgba(105, 11, 16, 0.46);
+  top: -9px;
+  left: -9px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(var(--oxblood-rgb), 0.5);
   border-radius: 50%;
   mix-blend-mode: multiply;
-  opacity: 0.55;
-}
-
-.pointerTrace::before,
-.pointerTrace::after {
-  content: '';
-  position: absolute;
-  background: rgba(105, 11, 16, 0.32);
 }
 
 .pointerTrace::before {
-  top: 7px;
-  left: -7px;
-  width: 28px;
-  height: 1px;
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: rgba(var(--oxblood-rgb), 0.55);
 }
 
-.pointerTrace::after {
-  top: -7px;
-  left: 7px;
-  width: 1px;
-  height: 28px;
+.atmosphere[data-tone='dark'] .pointerTrace {
+  border-color: rgba(var(--paper-soft-rgb), 0.55);
+  mix-blend-mode: screen;
 }
 
-.rail {
+.atmosphere[data-tone='dark'] .pointerTrace::before {
+  background: rgba(var(--paper-soft-rgb), 0.6);
+}
+
+/* Chapter folio on the right edge. */
+.folio {
   position: absolute;
   top: 50%;
-  right: max(0.4rem, calc(var(--page-gutter) * 0.25));
+  right: max(0.5rem, calc(var(--page-gutter) * 0.28));
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  color: rgba(23, 20, 18, 0.7);
-  font-size: 0.55rem;
+  gap: 0.7rem;
+  color: rgba(var(--ink-rgb), 0.72);
+  font-size: 0.56rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   writing-mode: vertical-rl;
   transform: translateY(-50%);
+  transition: color var(--duration-medium) var(--ease-out);
 }
 
-.rail i {
+.atmosphere[data-tone='dark'] .folio {
+  color: rgba(var(--paper-soft-rgb), 0.62);
+}
+
+.folioLabel {
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.folioNumber {
+  position: relative;
+  display: block;
+  height: 1.7em;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.folioNumber b {
+  display: block;
+  font-weight: 400;
+}
+
+.folio i {
   width: 1px;
-  height: 38px;
-  background: rgba(105, 11, 16, 0.34);
+  height: 34px;
+  background: rgba(var(--oxblood-rgb), 0.38);
+}
+
+.atmosphere[data-tone='dark'] .folio i {
+  background: rgba(var(--paper-soft-rgb), 0.3);
+}
+
+.folioTotal {
+  opacity: 0.6;
 }
 
 @media (max-width: 1099px) {
-  .rail,
+  .folio,
   .pointerTrace,
   .leftRule,
   .rightRule {
@@ -94,8 +164,9 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .progress {
-    display: none;
+@media (max-width: 767px) {
+  .stories {
+    gap: 3px;
+    padding: 0 12px;
   }
 }

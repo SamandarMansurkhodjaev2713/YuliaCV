@@ -6,21 +6,8 @@
   overflow: clip;
 }
 
-.section::before {
-  content: '02';
-  position: absolute;
-  right: -0.05em;
-  top: 0.16em;
-  color: transparent;
-  font-family: var(--font-display);
-  font-size: clamp(12rem, 30vw, 34rem);
-  line-height: 0.8;
-  -webkit-text-stroke: 1px rgba(250, 247, 240, 0.045);
-  pointer-events: none;
-}
-
 .caseMeta {
-  margin-top: var(--space-9);
+  margin-top: var(--space-8);
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -29,20 +16,20 @@
 
 .caseMeta > span {
   height: 1px;
-  background: rgba(250, 247, 240, 0.28);
+  background: var(--line-on-dark);
   transform-origin: left;
 }
 
 .caseMeta p {
   margin: 0;
-  color: rgba(250, 247, 240, 0.66);
+  color: rgba(var(--paper-soft-rgb), 0.66);
   font-size: var(--text-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .layout {
-  margin-top: clamp(4rem, 7vw, 7rem);
+  margin-top: clamp(3.5rem, 6vw, 6rem);
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--grid-gap);
@@ -52,9 +39,9 @@
 .desktopMedia {
   grid-column: 1 / 8;
   position: sticky;
-  top: 92px;
-  height: min(72vh, 690px);
-  min-height: 590px;
+  top: calc(var(--header-height) + 18px);
+  height: min(calc(100vh - var(--header-height) - 40px), 660px);
+  min-height: 560px;
 }
 
 .mediaMotion,
@@ -68,18 +55,9 @@
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   overflow: hidden;
-  border: 1px solid rgba(250, 247, 240, 0.28);
+  border: 1px solid var(--line-on-dark);
   background: var(--paper);
   color: var(--ink);
-}
-
-.mediaSurface::before {
-  content: '';
-  position: absolute;
-  inset: 0 29% 0 auto;
-  width: 1px;
-  background: rgba(23, 20, 18, 0.13);
-  pointer-events: none;
 }
 
 .mediaTopline,
@@ -95,13 +73,21 @@
 }
 
 .mediaTopline {
-  border-bottom: 1px solid rgba(23, 20, 18, 0.17);
+  border-bottom: 1px solid rgba(var(--ink-rgb), 0.17);
 }
 
 .mediaBottomline {
-  border-top: 1px solid rgba(23, 20, 18, 0.17);
+  border-top: 1px solid rgba(var(--ink-rgb), 0.17);
   color: var(--muted-ink);
   line-height: 1.3;
+}
+
+.mediaBottomline span:first-child {
+  min-width: 0;
+}
+
+.mediaBottomline span:last-child {
+  white-space: nowrap;
 }
 
 .steps {
@@ -110,13 +96,13 @@
 
 .step {
   position: relative;
-  min-height: min(55vh, 500px);
+  min-height: min(46vh, 430px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--space-8) 0;
-  border-top: 1px solid rgba(250, 247, 240, 0.2);
-  color: rgba(250, 247, 240, 0.52);
+  padding: var(--space-7) 0;
+  border-top: 1px solid rgba(var(--paper-soft-rgb), 0.2);
+  color: rgba(var(--paper-soft-rgb), 0.52);
   transition: color var(--duration-medium) var(--ease-out);
 }
 
@@ -170,7 +156,7 @@
   margin: var(--space-5) 0 0;
   max-width: 11ch;
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 4.2vw, 4.6rem);
+  font-size: clamp(2.2rem, 4vw, 4.2rem);
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.04em;
@@ -179,8 +165,8 @@
   hyphens: none;
 }
 
-.step p {
-  margin: var(--space-6) 0 0;
+.stepText {
+  margin: var(--space-5) 0 0;
   max-width: 38ch;
   font-size: var(--text-md);
   line-height: 1.55;
@@ -201,28 +187,29 @@
 .voiceVisual,
 .funnelVisual,
 .creatorsVisual,
-.strategyVisual {
+.strategyVisual,
+.operationsVisual {
   position: relative;
   z-index: 1;
   min-height: 0;
-  padding: clamp(1.5rem, 3vw, 3.25rem);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  overflow: hidden;
 }
 
 .packagingVisual {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: var(--space-7);
+  justify-content: center;
 }
 
 .phone {
-  width: min(76%, 360px);
-  margin-inline: auto;
+  width: min(70%, 340px);
   border: 1px solid var(--ink);
   padding: 0.8rem;
   background: var(--paper-soft);
   transform: rotate(-1.1deg);
-  box-shadow: 18px 18px 0 rgba(105, 11, 16, 0.13);
+  box-shadow: 18px 18px 0 rgba(var(--oxblood-rgb), 0.13);
 }
 
 .phoneTop,
@@ -328,30 +315,17 @@
   background: #766b62 !important;
 }
 
-.sideCaption {
-  margin: 0;
-  color: var(--muted-ink);
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  writing-mode: vertical-rl;
-}
-
-.voiceVisual {
-  display: flex;
-  flex-direction: column;
-}
-
 .voiceQuote {
   margin: auto 0 0;
-  max-width: 8.5ch;
+  max-width: 9ch;
   font-family: var(--font-display);
-  font-size: clamp(3.3rem, 6vw, 6.8rem);
-  line-height: 0.92;
+  font-size: clamp(2.8rem, 5vw, 5.6rem);
+  line-height: 0.94;
   letter-spacing: -0.045em;
 }
 
 .voiceRules {
-  margin-top: var(--space-8);
+  margin-top: var(--space-6);
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
@@ -370,21 +344,6 @@
   border-color: var(--oxblood);
 }
 
-.voiceFootnote,
-.strategyFootnote {
-  margin: auto 0 0;
-  max-width: 34ch;
-  color: var(--muted-ink);
-  line-height: 1.5;
-}
-
-.funnelVisual {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  overflow: hidden;
-}
-
 .funnelPath {
   margin: auto 0 0;
 }
@@ -394,7 +353,7 @@
   display: grid;
   grid-template-columns: 54px 1fr;
   align-items: center;
-  min-height: 52px;
+  min-height: 50px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -416,26 +375,13 @@
 }
 
 .funnelNode strong {
-  font-size: clamp(1rem, 2vw, 1.45rem);
+  font-size: clamp(1rem, 2vw, 1.4rem);
   font-weight: 500;
   letter-spacing: 0.04em;
 }
 
-.funnelNote {
-  margin: 0;
-  max-width: 42ch;
-  color: var(--muted-ink);
-  font-size: var(--text-sm);
-  line-height: 1.5;
-}
-
-.creatorsVisual {
-  display: flex;
-  flex-direction: column;
-}
-
 .creatorSheet {
-  width: min(88%, 500px);
+  width: min(88%, 480px);
   margin: auto;
   border: 1px solid var(--ink);
   background: var(--paper-soft);
@@ -444,7 +390,7 @@
 
 .sheetHead,
 .sheetRow {
-  padding: 0.85rem 1rem;
+  padding: 0.8rem 1rem;
   border-bottom: 1px solid var(--line);
 }
 
@@ -481,11 +427,6 @@
   transform: rotate(-4deg);
 }
 
-.strategyVisual {
-  display: flex;
-  flex-direction: column;
-}
-
 .strategyGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -495,7 +436,7 @@
 }
 
 .strategyGrid > div {
-  min-height: 160px;
+  min-height: 150px;
   display: grid;
   align-content: end;
   gap: 0.35rem;
@@ -519,7 +460,7 @@
 
 .strategyGrid strong {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 4.2rem);
+  font-size: clamp(2rem, 3.6vw, 3.8rem);
   font-weight: 400;
   line-height: 0.95;
 }
@@ -530,22 +471,57 @@
   opacity: 0.76;
 }
 
+.playbook {
+  margin: auto 0;
+  border-top: 1px solid var(--ink);
+}
+
+.playbookRow {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: var(--space-3);
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.playbookRow span {
+  grid-row: 1 / 3;
+  color: var(--oxblood);
+  font-size: var(--text-xs);
+}
+
+.playbookRow strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.playbookRow small {
+  margin-top: 0.35rem;
+  color: var(--muted-ink);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+}
+
 @media (max-width: 1099px) {
   .layout {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
   .desktopMedia {
-    grid-column: 1 / 6;
-    min-height: 520px;
+    grid-column: 1 / 5;
+    min-height: 500px;
   }
 
   .steps {
-    grid-column: 6 / -1;
+    grid-column: 5 / -1;
   }
 
   .step {
-    min-height: 470px;
+    min-height: 430px;
   }
 
   .step h3 {
@@ -554,14 +530,18 @@
   }
 
   .funnelNode {
-    min-height: 46px;
+    min-height: 44px;
+  }
+
+  .strategyGrid > div {
+    min-height: 120px;
   }
 }
 
 @media (max-width: 767px) {
   .caseMeta {
     grid-template-columns: 1fr;
-    margin-top: var(--space-7);
+    margin-top: var(--space-6);
   }
 
   .caseMeta p {
@@ -569,7 +549,7 @@
   }
 
   .layout {
-    margin-top: var(--space-9);
+    margin-top: var(--space-7);
     display: block;
   }
 
@@ -579,7 +559,7 @@
 
   .step {
     min-height: 0;
-    padding: var(--space-9) 0;
+    padding: var(--space-6) 0;
     color: var(--paper-soft);
   }
 
@@ -588,11 +568,11 @@
   }
 
   .stepTopline small {
-    max-width: 18ch;
+    display: none;
   }
 
   .step h3 {
-    font-size: clamp(2.15rem, 10.5vw, 3.1rem);
+    font-size: clamp(2rem, 10vw, 2.9rem);
     line-height: 1.01;
   }
 
@@ -600,14 +580,45 @@
     display: none;
   }
 
-  .step p {
+  .stepText {
     font-size: var(--text-base);
   }
 
   .mobileMedia {
     display: block;
-    height: min(128vw, 520px);
-    margin-top: var(--space-7);
+    margin-top: var(--space-5);
+  }
+
+  .mobileMedia .mediaSurface {
+    height: auto;
+    grid-template-rows: auto auto auto;
+  }
+
+  .packagingVisual,
+  .voiceVisual,
+  .funnelVisual,
+  .creatorsVisual,
+  .strategyVisual,
+  .operationsVisual {
+    padding: 1.25rem;
+  }
+
+  .packagingVisual {
+    padding-block: 1.5rem;
+  }
+
+  .phone {
+    width: min(68%, 250px);
+    box-shadow: 10px 10px 0 rgba(var(--oxblood-rgb), 0.13);
+  }
+
+  .voiceQuote {
+    margin-top: var(--space-5);
+    font-size: clamp(2.6rem, 12vw, 4rem);
+  }
+
+  .funnelPath {
+    margin-top: var(--space-4);
   }
 
   .funnelNode {
@@ -619,29 +630,20 @@
     font-size: 0.92rem;
   }
 
-  .funnelNote {
-    font-size: 0.74rem;
+  .creatorSheet {
+    margin: var(--space-5) auto var(--space-3);
   }
 
-  .packagingVisual,
-  .voiceVisual,
-  .funnelVisual,
-  .creatorsVisual,
-  .strategyVisual {
-    padding: 1.25rem;
-  }
-
-  .phone {
-    width: min(78%, 280px);
-    box-shadow: 10px 10px 0 rgba(105, 11, 16, 0.13);
-  }
-
-  .voiceQuote {
-    font-size: clamp(3rem, 14vw, 4.8rem);
+  .strategyGrid {
+    margin: var(--space-4) 0 0;
   }
 
   .strategyGrid > div {
-    min-height: 120px;
+    min-height: 118px;
+  }
+
+  .playbook {
+    margin: var(--space-4) 0 var(--space-3);
   }
 }
 
@@ -649,10 +651,10 @@
   .desktopMedia {
     position: relative;
     top: auto;
-    height: 610px;
+    height: 600px;
   }
 
   .step {
-    min-height: 470px;
+    min-height: 430px;
   }
 }

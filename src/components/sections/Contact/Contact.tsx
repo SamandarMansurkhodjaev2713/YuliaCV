@@ -1,13 +1,17 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { siteContent } from '../../../content/site';
 import { useMobileContactBar } from '../../../hooks/useMobileContactBar';
-import { MaskText } from '../../motion/MaskText/MaskText';
+import { useLocale } from '../../../i18n/useLocale';
 import { Reveal } from '../../motion/Reveal/Reveal';
 import { ArrowIcon } from '../../primitives/ArrowIcon/ArrowIcon';
+import { Button } from '../../primitives/Button/Button';
 import { Container } from '../../primitives/Container/Container';
+import { SectionHeading } from '../../primitives/SectionHeading/SectionHeading';
 import styles from './Contact.module.css';
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 export function MobileContactBar() {
+  const { content } = useLocale();
   const isVisible = useMobileContactBar();
   const reduceMotion = useReducedMotion();
 
@@ -16,86 +20,79 @@ export function MobileContactBar() {
       className={styles.mobileBar}
       aria-hidden={!isVisible}
       initial={false}
-      animate={{ y: isVisible ? 0 : '130%', opacity: isVisible ? 1 : 0 }}
-      transition={reduceMotion ? { duration: 0 } : { duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+      animate={{ y: isVisible ? 0 : '140%', opacity: isVisible ? 1 : 0 }}
+      transition={reduceMotion ? { duration: 0 } : { duration: 0.42, ease: EASE }}
     >
       <a
-        href={siteContent.contacts.telegram}
+        href={content.contacts.telegram}
         target="_blank"
         rel="noopener noreferrer"
         tabIndex={isVisible ? 0 : -1}
-        aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
+        aria-label={content.ui.telegramAria}
       >
-        Написать в Telegram <ArrowIcon />
+        <span>{content.ui.mobileBarCta}</span>
+        <ArrowIcon />
       </a>
     </motion.div>
   );
 }
 
 export function Contact() {
-  const reduceMotion = useReducedMotion();
+  const { content } = useLocale();
 
   return (
-    <section id="contact" className={styles.section} aria-labelledby="contact-title">
-      <motion.div
-        className={styles.plane}
-        aria-hidden="true"
-        initial={reduceMotion ? false : { opacity: 0 }}
-        whileInView={reduceMotion ? undefined : { opacity: [0, 0.2, 0] }}
-        viewport={{ once: true, amount: 0.12 }}
-        transition={{ duration: 0.72, times: [0, 0.35, 1], ease: [0.22, 1, 0.36, 1] }}
-      />
+    <section
+      id="contact"
+      className={styles.section}
+      aria-labelledby="contact-title"
+      data-chapter="contact"
+      data-tone="dark"
+    >
       <Container className={styles.inner}>
-        <Reveal className={styles.eyebrow} y={10}>
-          {siteContent.contact.eyebrow}
-        </Reveal>
+        <SectionHeading
+          section="contact"
+          inverse
+          eyebrow={content.contact.eyebrow}
+          title={content.contact.title}
+          titleId="contact-title"
+        />
 
-        <MaskText as="h2" className={styles.title} id="contact-title">
-          {siteContent.contact.title}
-        </MaskText>
+        <div className={styles.body}>
+          <Reveal className={styles.description} delay={0.08}>
+            <p>{content.contact.description}</p>
+          </Reveal>
 
-        <Reveal className={styles.description} delay={0.1}>
-          <p>{siteContent.contact.description}</p>
-        </Reveal>
-
-        <Reveal className={styles.actions} delay={0.17}>
-          <a
-            className={styles.telegram}
-            href={siteContent.contacts.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Написать в Telegram Юлии, откроется в новой вкладке"
-          >
-            <span>{siteContent.contact.telegramLabel}</span>
-            <ArrowIcon />
-          </a>
-
-          {siteContent.contacts.instagram ? (
-            <a
-              className={styles.secondary}
-              href={siteContent.contacts.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Открыть Instagram Юлии, откроется в новой вкладке"
+          <Reveal className={styles.actions} delay={0.16}>
+            <Button
+              href={content.contacts.telegram}
+              tone="paper"
+              size="lg"
+              external
+              aria-label={content.ui.telegramAria}
             >
-              {siteContent.contact.instagramLabel} <ArrowIcon />
-            </a>
-          ) : (
-            <a
-              className={styles.secondary}
-              href={siteContent.contacts.cv}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Открыть CV <ArrowIcon />
-            </a>
-          )}
-        </Reveal>
+              {content.contact.telegramLabel}
+            </Button>
+            <div className={styles.secondary}>
+              <Button href={`mailto:${content.contacts.email}`} variant="link" tone="paper" aria-label={content.ui.emailAria}>
+                {content.contact.emailLabel}
+              </Button>
+              <Button href={content.contacts.cv} variant="link" tone="paper" external aria-label={content.ui.cvAria}>
+                {content.ui.cvLabel}
+              </Button>
+            </div>
+          </Reveal>
 
-        <div className={styles.contactIndex} aria-hidden="true">
-          <span>07</span>
-          <span>LET'S TALK</span>
+          <Reveal className={styles.meta} delay={0.22} y={8}>
+            <span>{content.contact.note}</span>
+            <span>
+              {content.contacts.telegramHandle} · {content.contacts.email}
+            </span>
+          </Reveal>
         </div>
+
+        <span className={styles.caption} aria-hidden="true">
+          {content.contact.indexCaption}
+        </span>
       </Container>
     </section>
   );

@@ -1,62 +1,57 @@
-import { motion, useReducedMotion } from 'motion/react';
-import { siteContent } from '../../../content/site';
-import { MaskText } from '../../motion/MaskText/MaskText';
+import { useLocale } from '../../../i18n/useLocale';
+import { pad } from '../../../lib/sections';
 import { Reveal } from '../../motion/Reveal/Reveal';
-import { ArrowIcon } from '../../primitives/ArrowIcon/ArrowIcon';
+import { Button } from '../../primitives/Button/Button';
 import { Container } from '../../primitives/Container/Container';
+import { SectionHeading } from '../../primitives/SectionHeading/SectionHeading';
 import styles from './About.module.css';
 
 export function About() {
-  const reduceMotion = useReducedMotion();
+  const { content } = useLocale();
 
   return (
-    <section id="about" className={styles.section} aria-labelledby="about-title">
+    <section
+      id="about"
+      className={styles.section}
+      aria-labelledby="about-title"
+      data-chapter="about"
+      data-tone="light"
+    >
       <Container>
-        <div className={styles.topline}>
-          <Reveal className={styles.eyebrow} y={10}>
-            {siteContent.about.eyebrow}
-          </Reveal>
-          <motion.span
-            initial={reduceMotion ? false : { scaleX: 0 }}
-            whileInView={reduceMotion ? undefined : { scaleX: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          />
-        </div>
+        <SectionHeading
+          section="about"
+          eyebrow={content.about.eyebrow}
+          title={content.about.title}
+          titleId="about-title"
+        />
 
         <div className={styles.grid}>
-          <div className={styles.statement}>
-            <MaskText as="h2" className={styles.title} id="about-title">
-              {siteContent.about.title}
-            </MaskText>
-            <Reveal className={styles.quote} delay={0.08}>
-              <blockquote>{siteContent.about.quote}</blockquote>
-            </Reveal>
-          </div>
+          <Reveal className={styles.quote} delay={0.08}>
+            <blockquote>{content.about.quote}</blockquote>
+          </Reveal>
 
           <div className={styles.story}>
-            {siteContent.about.paragraphs.map((paragraph, index) => (
+            {content.about.paragraphs.map((paragraph, index) => (
               <Reveal key={paragraph} delay={index * 0.06}>
                 <p>{paragraph}</p>
               </Reveal>
             ))}
 
             <Reveal className={styles.facts} delay={0.12}>
-              {siteContent.about.facts.map((fact, index) => (
+              {content.about.facts.map((fact, index) => (
                 <div key={fact}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <span>{pad(index + 1)}</span>
                   <strong>{fact}</strong>
                 </div>
               ))}
             </Reveal>
 
             <Reveal className={styles.cvAction} delay={0.16}>
-              <a href={siteContent.contacts.cv} target="_blank" rel="noopener noreferrer">
-                Открыть CV <ArrowIcon />
-              </a>
+              <Button href={content.contacts.cv} variant="outline" external aria-label={content.ui.cvAria}>
+                {content.ui.cvLabel}
+              </Button>
             </Reveal>
           </div>
-
         </div>
       </Container>
     </section>

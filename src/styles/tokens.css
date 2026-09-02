@@ -7,6 +7,12 @@
   --muted-ink: #6f675f;
   --line: rgba(23, 20, 18, 0.2);
 
+  /* Channel triplets for alpha variants: rgba(var(--oxblood-rgb), 0.08) */
+  --oxblood-rgb: 105, 11, 16;
+  --ink-rgb: 23, 20, 18;
+  --paper-soft-rgb: 250, 247, 240;
+  --line-on-dark: rgba(250, 247, 240, 0.24);
+
   --font-display: 'Prata', 'Times New Roman', serif;
   --font-body: 'Onest', Arial, sans-serif;
 
@@ -33,12 +39,17 @@
   --container-max: 1320px;
   --page-gutter: clamp(1.25rem, 3.6vw, 4.5rem);
   --grid-gap: clamp(1rem, 1.65vw, 1.5rem);
-  --section-space: clamp(7rem, 11vw, 10.5rem);
+  --section-space: clamp(6.5rem, 10vw, 9.5rem);
+  --header-height: 78px;
 
   --duration-fast: 190ms;
   --duration-medium: 420ms;
+  --duration-slow: 720ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
+  --z-atmosphere: 35;
   --z-header: 40;
   --z-mobile-cta: 45;
   --z-intro: 100;
@@ -46,9 +57,10 @@
 
 @media (max-width: 767px) {
   :root {
-    --hero-size: clamp(3.8rem, 16.6vw, 6rem);
-    --heading-lg: clamp(2.9rem, 13vw, 4.5rem);
-    --heading-xl: clamp(3.5rem, 15vw, 5.4rem);
-    --section-space: clamp(5.5rem, 20vw, 7rem);
+    --hero-size: clamp(3.6rem, 15.4vw, 5.6rem);
+    --heading-lg: clamp(2.7rem, 12vw, 4.2rem);
+    --heading-xl: clamp(3.2rem, 14vw, 5rem);
+    --section-space: clamp(4.5rem, 15vw, 6rem);
+    --header-height: 64px;
   }
 }

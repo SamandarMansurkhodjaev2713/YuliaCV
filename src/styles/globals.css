@@ -1,6 +1,6 @@
 html {
   overflow-x: clip;
-  scroll-padding-top: 88px;
+  scroll-padding-top: calc(var(--header-height) + 10px);
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
@@ -17,7 +17,8 @@ body {
   overflow-x: clip;
 }
 
-body[data-menu-open='true'] {
+body[data-menu-open='true'],
+body[data-intro-active='true'] {
   overflow: hidden;
 }
 
@@ -36,7 +37,19 @@ main:focus {
 }
 
 section[id] {
-  scroll-margin-top: 88px;
+  scroll-margin-top: calc(var(--header-height) + 10px);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .skip-link {

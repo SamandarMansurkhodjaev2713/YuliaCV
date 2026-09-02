@@ -1,26 +1,40 @@
 .overlay {
+  --intro-name-size: calc(var(--hero-size) * 1.16);
+
   position: fixed;
   inset: 0;
   z-index: var(--z-intro);
-  display: grid;
-  place-items: center;
   overflow: hidden;
+  color: var(--ink);
+  cursor: pointer;
+  user-select: none;
+}
+
+.overlay[data-phase='handoff'] {
+  pointer-events: none;
+  cursor: default;
+}
+
+.paper {
+  position: absolute;
+  inset: 0;
   background: var(--paper);
-  transform-origin: top;
 }
 
 .metaTop,
 .metaBottom {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   left: var(--page-gutter);
   right: var(--page-gutter);
   display: flex;
   justify-content: space-between;
+  gap: var(--space-4);
   color: var(--muted-ink);
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 
 .metaTop {
@@ -35,129 +49,155 @@
   border-top: 1px solid var(--line);
 }
 
-.signal {
+.metaBottom b {
+  color: var(--oxblood);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.skipHint {
+  color: var(--muted-ink);
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+/* The "system": hairlines of the grid the noise snaps into. */
+.grid {
   position: absolute;
-  z-index: 0;
-  right: clamp(-1.5rem, 4vw, 4rem);
-  top: 50%;
-  color: transparent;
-  font-family: var(--font-display);
-  font-size: clamp(10rem, 28vw, 27rem);
-  line-height: 0.75;
-  -webkit-text-stroke: 1px rgba(105, 11, 16, 0.09);
-  translate: 0 -50%;
-}
-
-.overlay::before,
-.overlay::after {
-  content: '';
-  position: absolute;
-  background: var(--line);
-}
-
-.overlay::before {
-  width: 1px;
-  height: 100%;
-  left: 50%;
-  opacity: 0.5;
-}
-
-.overlay::after {
-  width: 100%;
-  height: 1px;
-  top: 50%;
-  opacity: 0.35;
-}
-
-.content {
-  position: relative;
   z-index: 1;
-  width: min(82vw, 680px);
-  display: grid;
-  justify-items: center;
+  pointer-events: none;
+}
+
+.gridVertical,
+.gridHorizontal {
+  position: absolute;
+  display: block;
+  background: rgba(var(--ink-rgb), 0.14);
+}
+
+.gridVertical {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform-origin: top;
+}
+
+.gridHorizontal {
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform-origin: left;
+}
+
+/* Feed fragments: the noise. */
+.fragment {
+  position: absolute;
+  z-index: 2;
+  translate: -50% -50%;
+  display: inline-block;
+  padding: 0.28em 0.5em;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+
+.box {
+  border: 1px solid rgba(var(--ink-rgb), 0.45);
+}
+
+.pill {
+  border: 1px solid rgba(var(--oxblood-rgb), 0.55);
+  border-radius: 999px;
+  color: var(--oxblood);
+}
+
+/* The three words that survive. */
+.keeper {
+  position: absolute;
+  z-index: 2;
+  translate: -50% -50%;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6em;
+  padding: 0.5em 0.85em;
+  border: 1px solid var(--oxblood);
+  background: var(--paper);
+  color: var(--oxblood);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+
+.keeper i {
+  font-size: 0.72em;
+  font-style: normal;
+  opacity: 0.6;
+}
+
+/* The meaning: name, role, sequence. */
+.center {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 50%;
+  width: min(92vw, 900px);
+  translate: -50% -50%;
   text-align: center;
 }
 
-.mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-bottom: var(--space-5);
-  color: var(--oxblood);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-
-.mark span {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 400;
-  letter-spacing: -0.07em;
-}
-
-.mark i {
-  width: 26px;
-  height: 1px;
-  background: currentColor;
-}
-
-.mask {
-  overflow: hidden;
-}
-
-.name {
+.nameLine {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(3.8rem, 10.2vw, 7.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.05em;
-}
-
-.surnameMask {
-  margin-top: -0.04em;
-}
-
-.surname {
-  margin: 0;
-  color: var(--oxblood);
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6.65vw, 5rem);
+  font-size: var(--intro-name-size);
   font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: -0.055em;
+  line-height: 0.94;
+  letter-spacing: -0.048em;
+}
+
+.nameFirst,
+.nameSecond {
+  display: inline-block;
+  transform-origin: top left;
+  will-change: transform, clip-path;
+}
+
+.nameSecond {
+  color: var(--oxblood);
 }
 
 .role {
-  margin: var(--space-4) 0 0;
+  margin: var(--space-5) 0 0;
+  color: var(--ink);
   font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: 0.16em;
 }
 
-.line {
-  width: min(58vw, 420px);
-  height: 2px;
-  margin-top: var(--space-6);
-  background: var(--oxblood);
-  transform-origin: left;
-}
-
 .sequence {
-  width: 100%;
-  margin: var(--space-4) 0 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: var(--space-5);
   color: var(--oxblood);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.14em;
 }
 
 .sequence span {
-  display: grid;
-  gap: 0.35rem;
-  padding: 0.75rem 0.5rem 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
   border-right: 1px solid var(--line);
 }
 
@@ -173,16 +213,8 @@
 }
 
 @media (max-width: 767px) {
-  .overlay::before {
-    left: 20px;
-  }
-
-  .overlay::after {
-    display: none;
-  }
-
-  .content {
-    width: calc(100% - 40px);
+  .overlay {
+    --intro-name-size: var(--hero-size);
   }
 
   .metaTop,
@@ -192,18 +224,37 @@
     font-size: 0.54rem;
   }
 
-  .metaTop span:last-child,
-  .metaBottom span:first-child {
+  .metaTop span:last-child {
     display: none;
   }
 
-  .signal {
-    right: -4rem;
-    font-size: 15rem;
+  .fragment {
+    padding: 0.25em 0.42em;
+    letter-spacing: 0.06em;
+  }
+
+  .keeper {
+    padding: 0.42em 0.6em;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  .center {
+    width: calc(100% - 40px);
+  }
+
+  .role {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
   }
 
   .sequence {
+    font-size: 0.58rem;
     letter-spacing: 0.08em;
+  }
+
+  .sequence span {
+    padding: 0.3rem 0.55rem;
   }
 }
 

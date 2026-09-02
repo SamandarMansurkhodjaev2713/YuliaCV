@@ -4,7 +4,7 @@
 }
 
 .inner {
-  min-height: 180px;
+  min-height: 170px;
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
@@ -22,6 +22,8 @@
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.5vw, 2.5rem);
   font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .brand span,
@@ -44,6 +46,12 @@
   color: inherit;
   text-decoration-color: rgba(250, 247, 240, 0.35);
   text-underline-offset: 0.35em;
+  transition: text-decoration-color var(--duration-fast) var(--ease-out);
+}
+
+.links a:hover,
+.links a:focus-visible {
+  text-decoration-color: var(--paper-soft);
 }
 
 .links svg {
@@ -65,14 +73,16 @@
 
 @media (max-width: 767px) {
   .inner {
+    min-height: 0;
     grid-template-columns: 1fr;
     align-items: start;
-    gap: var(--space-7);
-    padding-bottom: max(var(--space-8), env(safe-area-inset-bottom));
+    gap: var(--space-6);
+    padding-block: var(--space-7) max(var(--space-8), calc(var(--space-6) + env(safe-area-inset-bottom)));
   }
 
   .links {
     flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
   }
 
   .meta {
