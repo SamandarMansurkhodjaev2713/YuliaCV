@@ -18,12 +18,16 @@ function deriveGitHubPagesUrl() {
   if (!repository) return null;
   const [owner, repo] = repository.split('/');
   if (!owner || !repo) return null;
-  return repo.toLowerCase() === `${owner.toLowerCase()}.github.io`
-    ? `https://${owner}.github.io/`
-    : `https://${owner}.github.io/${repo}/`;
+  // github.io hosts are always lower-case; the repository path keeps its casing.
+  const host = `${owner.toLowerCase()}.github.io`;
+  return repo.toLowerCase() === host ? `https://${host}/` : `https://${host}/${repo}/`;
 }
 
-const siteUrl = normalizeUrl(process.env.SITE_URL ?? deriveGitHubPagesUrl());
+/* An unset Actions variable arrives as an empty string, not as undefined, so the
+   fallback has to be `||`: with `??` the derived Pages URL was never reached and
+   the deployed page shipped a relative og:image with no canonical or sitemap. */
+const configuredUrl = process.env.SITE_URL?.trim();
+const siteUrl = normalizeUrl(configuredUrl || deriveGitHubPagesUrl());
 let html = await readFile(indexPath, 'utf8');
 
 if (siteUrl) {

@@ -140,6 +140,17 @@ test.describe('public portfolio', () => {
     await skipIntro(page);
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('./');
+    /* WebKit reaches `load` before style resolution has finished, and
+       getComputedStyle then reports the initial value for every inherited
+       property — black text on every element without its own colour rule, which
+       axe reads as dozens of contrast failures that do not exist on screen.
+       Waiting for the fonts and a painted frame forces the real cascade. */
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await new Promise((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve(null)));
+      });
+    });
     const results = await new AxeBuilder({ page }).analyze();
     const highImpact = results.violations.filter(
       (violation) => violation.impact === 'critical' || violation.impact === 'serious',
