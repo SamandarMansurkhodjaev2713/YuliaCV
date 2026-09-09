@@ -1,7 +1,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import portraitUrl from '../../../assets/images/yulia-portrait.webp';
+import portraitUrl from '../../../assets/images/yulia-portrait-event.webp';
 import { useLocale } from '../../../i18n/useLocale';
 import { useIntroGate } from '../../motion/IntroGate/useIntroGate';
 import { Button } from '../../primitives/Button/Button';
@@ -125,8 +125,8 @@ export function Hero() {
             <motion.img
               src={portraitUrl}
               alt={content.hero.portraitAlt}
-              width="720"
-              height="1080"
+              width="1440"
+              height="2160"
               fetchPriority="high"
               style={{ y: imageY }}
               initial={reduceMotion ? false : { scale: 1.08 }}
